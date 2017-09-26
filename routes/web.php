@@ -11,9 +11,10 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+//Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
+Route::get('/', 'ProductController@index');
 Route::resource('product', 'ProductController');
 Route::get('product/personaliser/{id}/{gatewaymulti?}', 'ProductController@personaliser');
 Route::get('product/personaliser/epa/{id}', 'ProductController@getExternalPricingAPI');
