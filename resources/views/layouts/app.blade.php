@@ -36,7 +36,6 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ action('ProductController@index') }}">Products</a></li>
                         <li><a href="{{ action('CartController@index') }}">Basket</a></li>
                     </ul>
                 </div>

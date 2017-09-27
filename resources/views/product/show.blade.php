@@ -9,7 +9,7 @@
     
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ $product->image }}" alt="{{ $product->name }}" class="img-responsive">
+            <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="img-responsive">
         </div>
         
         <div class="col-md-7">
