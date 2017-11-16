@@ -72,6 +72,53 @@ class CartController extends Controller
         
         return redirect()->back();
     }
+	
+	public function getRemoveItem($rowId){
+		// get the row & remove it
+		\Cart::remove($rowId);
+		
+		// message
+		\Session::flash('message', 'Item removed');
+		\Session::flash('alert-class', 'alert-success');
+		
+		// go to the basket
+		return redirect()->back();
+	}
+    
+    public function postUpdateQty(Request $request, $rowId){
+		Cart::update($rowId, [
+			'qty' => $request->input('qty'),
+		]);
+        
+        return redirect()->back();
+    }
+    
+	public function postToPrint(Request $request){
+        $validatorRules = [
+            'name' =>               'required',
+            'email' =>              'required|email',
+            'add1' =>               'required',
+            'add3' =>               'required',
+            'postcode' =>           'required',
+            'country' =>   'required',
+        ];
+        
+        $validatorMessages = [
+            'name.required' => 'Please enter your name',
+            'email.required' => 'Please enter your email address',
+            'email.email' => 'Please enter a valid email address',
+            'add1.required' => 'Please ensure you have entered at least the 1st line of the address, the town/city and the postcode',
+            'add3.required' => 'Please ensure you have entered at least the 1st line of the address, the town/city and the postcode',
+            'postcode.required' => 'Please ensure you have entered at least the 1st line of the address, the town/city and the postcode',
+            'country.required' => 'Please choose a country from the dropdown menu',
+        ];
+        
+        $validator = \Validator::make($request->all(), $validatorRules, $validatorMessages);
+        if($validator->fails()){
+            return redirect()->back()->withErrors($validator)->withInput();
+        }
+        
+    }
     
     private function gatewayAdd($data){
         $type = $_SERVER['CONTENT_TYPE'];
@@ -129,7 +176,7 @@ class CartController extends Controller
         
         $i = 1;
         $items = [];
-        foreach(\Basket::content() as $row){
+        foreach(Cart::content() as $row){
             if($row->options->printjobid){
                 $product = \App\Product::where('ownArticleNumber', $row->id)->first();
                 

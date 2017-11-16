@@ -23,3 +23,7 @@ Route::get('basket', 'CartController@index');
 Route::post('basket/add/{gatewaymulti?}', 'CartController@add');
 Route::get('basket/destroy', 'CartController@destroy');
 Route::get('basket/redir/{id?}/{gatewaymultiId?}', 'CartController@gatewayRedir');
+Route::get('basket/remove-item/{rowId}', 'CartController@getRemoveItem');
+Route::post('basket/update-qty/{rowId}', 'CartController@postUpdateQty');
+Route::post('basket/post-to-print', 'CartController@postToPrint');
+Route::get('complete', 'CartController@getComplete');
