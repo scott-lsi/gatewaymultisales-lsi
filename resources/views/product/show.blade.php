@@ -9,7 +9,14 @@
     
     <div class="row">
         <div class="col-md-5">
-            <img src="{{ asset('products/' . $product->image) }}" alt="{{ $product->name }}" class="img-responsive">
+            <?php
+                if(strncmp($product->image, 'http', 4) === 0){
+                    $imageurl = $product->image;
+                } else {
+                    $imageurl = asset('products/' . $product->image);
+                }
+            ?>
+            <img src="{{ $imageurl }}" alt="{{ $product->name }}" class="img-responsive">
         </div>
         
         <div class="col-md-7">
