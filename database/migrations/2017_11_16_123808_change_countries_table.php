@@ -14,7 +14,10 @@ class ChangeCountriesTable extends Migration
     public function up()
     {
         Schema::table('countries', function (Blueprint $table) {
-            //
+            $table->dropColumn('id');
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
+            $tsable->string('code')->first();
         });
     }
 
