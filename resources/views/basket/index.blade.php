@@ -81,6 +81,13 @@
                         </div>
                     
                         <hr>
+                    
+                        <h4>Delivery Info</h4>
+
+                        <div class="form-group">
+                            <label for="recipient">Recipient Name *</label>
+                            {!! Form::text('recipient', null, ['class' => 'form-control', 'id' => 'recipient']) !!}
+                        </div>
 
                         <div class="form-group">
                             <label for="email">Address Line 1 *</label>
@@ -105,6 +112,11 @@
                         <div class="form-group">
                             <label for="email">Postcode *</label>
                             {!! Form::text('postcode', null, ['class' => 'form-control', 'id' => 'postcode']) !!}
+                        </div>
+                    
+                        <div class="form-group">
+                            <label for="country">Country *</label>
+                            {!! Form::select('country', $countries, 'GB', ['class' => 'form-control country', 'id' => 'country']) !!}
                         </div>
 
                         <hr>

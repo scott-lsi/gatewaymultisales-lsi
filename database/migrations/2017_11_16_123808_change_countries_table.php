@@ -17,7 +17,7 @@ class ChangeCountriesTable extends Migration
             $table->dropColumn('id');
             $table->dropColumn('created_at');
             $table->dropColumn('updated_at');
-            $tsable->string('code')->first();
+            $table->string('code')->first();
         });
     }
 

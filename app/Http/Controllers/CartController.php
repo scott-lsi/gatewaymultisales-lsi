@@ -13,6 +13,7 @@ class CartController extends Controller
         
         return view('basket.index', [
             'basket' => $basket,
+            'countries' => \App\Country::orderBy('langEN')->pluck('langEN', 'alpha2'),
         ]);
     }
     
@@ -97,6 +98,7 @@ class CartController extends Controller
         $validatorRules = [
             'name' =>               'required',
             'email' =>              'required|email',
+            'recipient' =>              'required',
             'add1' =>               'required',
             'add3' =>               'required',
             'postcode' =>           'required',
@@ -107,10 +109,11 @@ class CartController extends Controller
             'name.required' => 'Please enter your name',
             'email.required' => 'Please enter your email address',
             'email.email' => 'Please enter a valid email address',
-            'add1.required' => 'Please ensure you have entered at least the 1st line of the address, the town/city and the postcode',
-            'add3.required' => 'Please ensure you have entered at least the 1st line of the address, the town/city and the postcode',
-            'postcode.required' => 'Please ensure you have entered at least the 1st line of the address, the town/city and the postcode',
-            'country.required' => 'Please choose a country from the dropdown menu',
+            'recipient.required' => 'Please ensure you have entered a recipient name',
+            'add1.required' => 'Please ensure you have entered at least the 1st line of the delivery address',
+            'add3.required' => 'Please ensure you have entered at town/city of the delivery address',
+            'postcode.required' => 'Please ensure you have entered at least the postcode of the delivery address',
+            'country.required' => 'Please choose a country from the delivery address dropdown menu',
         ];
         
         $validator = \Validator::make($request->all(), $validatorRules, $validatorMessages);
@@ -118,6 +121,14 @@ class CartController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         
+        $order = $this->gatewayPrepare($request);
+        $this->gatewaySend($order);
+        
+        Cart::destroy();
+        
+        return view('basket.complete', [
+            'order' => $order,
+        ]);
     }
     
     private function gatewayAdd($data){
@@ -140,34 +151,36 @@ class CartController extends Controller
     }
     
     private function gatewayPrepare(Request $request){
+        $ordernumber = 'JG' . str_random(8);
+        
         $gatewayArray = [
-            'external_ref' => $request->session()->get('orderId'),
+            'external_ref' => $ordernumber,
             'company_ref_id' => env('GATEWAY_COMPANY'),
             'sale_datetime' => date('Y-m-d H:i:s'),
             
-            'customer_name' => $request->input('dispatch-firstname') . ' ' . $request->input('dispatch-lastname'),
+            'customer_name' => $request->input('recipient'),
             'customer_email' => $request->input('email'),
 			
-			'shipping_address_1' =>	$request->input('dispatch-companyname'),
-			'shipping_address_2' =>	$request->input('dispatch-line1'),
-			'shipping_address_3' =>	$request->input('dispatch-line2'),
-			'shipping_address_4' =>	$request->input('dispatch-city'),
+			'shipping_address_1' =>	$request->input('add1'),
+			'shipping_address_2' =>	$request->input('add2'),
+			'shipping_address_3' =>	$request->input('add3'),
+			'shipping_address_4' =>	$request->input('add4'),
 			'shipping_address_5' =>	'',
-			'shipping_postcode' =>	$request->input('dispatch-postcode'),
-			'shipping_country' =>	$request->input('dispatch-country'),
-			'shipping_country_code' => $request->input('dispatch-country'),
+			'shipping_postcode' =>	$request->input('postcode'),
+			'shipping_country' =>	$request->input('country'),
+			'shipping_country_code' => $request->input('country'),
 			
 			'shipping_method' =>	'',
 			'shipping_carrier' =>	'',
 			'shipping_tracking' =>	'',
 			
-			'billing_address_1' =>	$request->input('invoice-companyname'),
-			'billing_address_2' =>	$request->input('invoice-line1'),
-			'billing_address_3' =>	$request->input('invoice-line2'),
-			'billing_address_4' =>	$request->input('invoice-city'),
+			'billing_address_1' =>	$request->input('name'),
+			'billing_address_2' =>	'',
+			'billing_address_3' =>	'',
+			'billing_address_4' =>	'',
 			'billing_address_5' =>	'',
-			'billing_postcode' =>	$request->input('invoice-postcode'),
-			'billing_country' =>	$request->input('invoice-country'),
+			'billing_postcode' =>	'',
+			'billing_country' =>	'',
 			
 			'payment_trans_id' =>	'0123456789ABC',
 			
@@ -178,11 +191,11 @@ class CartController extends Controller
         $items = [];
         foreach(Cart::content() as $row){
             if($row->options->printjobid){
-                $product = \App\Product::where('ownArticleNumber', $row->id)->first();
+                $product = \App\Product::find($row->id);
                 
                 $productArray = [
-                    'sku' => $product->ownArticleNumber,
-                    'external_ref' => $request->session()->get('orderId') . '-' . str_pad($i, 2, '0', STR_PAD_LEFT),
+                    'sku' => $product->sku,
+                    'external_ref' => $ordernumber . '-' . str_pad($i, 2, '0', STR_PAD_LEFT),
                     'description' => $row->name,
                     'quantity' => $row->qty,
                     'type' => 2, // 2 = Print Job (http://developers.gateway3d.com/Print-iT_Integration#Item_Type_Codes)
@@ -211,7 +224,7 @@ class CartController extends Controller
 		curl_setopt($curl, CURLOPT_HTTPHEADER,
 			array("Content-type: application/json"));
 		curl_setopt($curl, CURLOPT_POST, true);
-		curl_setopt($curl, CURLOPT_POSTFIELDS, $order->gateway);
+		curl_setopt($curl, CURLOPT_POSTFIELDS, $order);
 
 		$gatewayResponse = curl_exec($curl);
 
@@ -224,7 +237,7 @@ class CartController extends Controller
 		curl_close($curl);
 		/**** send the order to g3d end ****/
 		
-		$order->gateway_response = $gatewayResponse;
-		$order->save();
+		/*$order->gateway_response = $gatewayResponse;
+		$order->save();*/
     }
 }
