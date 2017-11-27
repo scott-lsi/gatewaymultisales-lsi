@@ -50,15 +50,15 @@
                             
                             <p><small><a href="{{ action('CartController@getRemoveItem', ['rowId' => $row->rowId]) }}">Remove</a></small></p>
                         </td>
-                        <td>{{ $row->price }}</td>
-                        <td>{{ $row->subtotal }}</td>
+                        <td>&pound;{{ number_format($row->price, 2) }}</td>
+                        <td>&pound;{{ number_format($row->subtotal, 2) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
                 <tfoot>
                     <tr>
                         <td colspan="3" class="text-right">Total:</td>
-                        <td>£{{ \Cart::total() }}</td>
+                        <td>£{{ \Cart::total(2) }}</td>
                     </tr>
                 </tfoot>
             </table>
