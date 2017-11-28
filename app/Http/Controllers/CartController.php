@@ -124,7 +124,7 @@ class CartController extends Controller
         }
         
         $order = $this->gatewayPrepare($request);
-        //$this->gatewaySend($order);
+        $this->gatewaySend($order);
         
         // email
         $view_data = [
@@ -138,7 +138,7 @@ class CartController extends Controller
         
         $this->sendOrderEmail($view_data, $email_data);
         
-        //Cart::destroy();
+        Cart::destroy();
         
         return view('basket.complete', [
             'order' => $order,
