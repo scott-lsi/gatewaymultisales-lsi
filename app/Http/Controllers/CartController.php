@@ -124,9 +124,21 @@ class CartController extends Controller
         }
         
         $order = $this->gatewayPrepare($request);
-        $this->gatewaySend($order);
+        //$this->gatewaySend($order);
         
-        Cart::destroy();
+        // email
+        $view_data = [
+            'name' => $request->input('name'),
+            'basket' => \Cart::Content(),
+        ];
+        $email_data = [
+            'name' => $request->input('name'),
+            'email' => $request->input('email'),
+        ];
+        
+        $this->sendOrderEmail($view_data, $email_data);
+        
+        //Cart::destroy();
         
         return view('basket.complete', [
             'order' => $order,
@@ -241,5 +253,13 @@ class CartController extends Controller
 		
 		/*$order->gateway_response = $gatewayResponse;
 		$order->save();*/
+    }
+    
+    private function sendOrderEmail($view_data, $email_data){
+        \Mail::send('emails.order', $view_data, function($message) use($email_data) {
+            $message->to($email_data['email'], $email_data['name'])
+                    ->bcc(env('ORDER_MAIL_BCC', false))
+                    ->subject('Your order for Jägermeister labels');
+        });
     }
 }
