@@ -118,10 +118,30 @@
                             <label for="country">Country *</label>
                             {!! Form::select('country', $countries, 'GB', ['class' => 'form-control country', 'id' => 'country']) !!}
                         </div>
+                    
+                        <hr>
+                    
+                        <h4>Additional Details</h4>
+
+                        <div class="form-group">
+                            <label for="email">Event Date</label>
+                            {!! Form::text('deliverydate', null, ['class' => 'form-control datepicker', 'id' => 'deliverydate']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">Notes</label>
+                            {!! Form::textarea('notes', null, ['class' => 'form-control', 'id' => 'notes', 'rows' => 3]) !!}
+                        </div>
 
                         <hr>
+                    
+                        <div class="checkbox">
+                            <label>
+                                {!! Form::checkbox('terms', 'agree') !!} I have checked any uploaded logos and am happy with the quality
+                            </label>
+                        </div>
 
-                        {!! Form::submit('Place Order', ['class' => 'btn btn-primary']) !!}
+                        {!! Form::submit('Place Order', ['class' => 'btn btn-block btn-primary']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>

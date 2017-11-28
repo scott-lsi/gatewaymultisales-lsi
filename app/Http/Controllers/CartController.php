@@ -98,11 +98,12 @@ class CartController extends Controller
         $validatorRules = [
             'name' =>               'required',
             'email' =>              'required|email',
-            'recipient' =>              'required',
+            'recipient' =>          'required',
             'add1' =>               'required',
             'add3' =>               'required',
             'postcode' =>           'required',
-            'country' =>   'required',
+            'country' =>            'required',
+            'terms' =>              'required',
         ];
         
         $validatorMessages = [
@@ -114,6 +115,7 @@ class CartController extends Controller
             'add3.required' => 'Please ensure you have entered at town/city of the delivery address',
             'postcode.required' => 'Please ensure you have entered at least the postcode of the delivery address',
             'country.required' => 'Please choose a country from the delivery address dropdown menu',
+            'terms.required' => 'Please indicate that you have checked any uploaded logos and are happy with the quality',
         ];
         
         $validator = \Validator::make($request->all(), $validatorRules, $validatorMessages);
@@ -174,9 +176,9 @@ class CartController extends Controller
 			'shipping_carrier' =>	'',
 			'shipping_tracking' =>	'',
 			
-			'billing_address_1' =>	$request->input('name'),
-			'billing_address_2' =>	'',
-			'billing_address_3' =>	'',
+			'billing_address_1' =>	$request->input('name') . '(' . $request->input('email') . ')',
+			'billing_address_2' =>	$request->input('deliverydate'),
+			'billing_address_3' =>	$request->input('notes'),
 			'billing_address_4' =>	'',
 			'billing_address_5' =>	'',
 			'billing_postcode' =>	'',
