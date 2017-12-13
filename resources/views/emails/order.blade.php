@@ -32,5 +32,13 @@
 	</td>
 </tr>
 @endforeach
+<tr>
+	<td>
+        <p style="font-size:11px; margin-top:30px; margin-bottom: 20px;">Hi {{ $name }},
+            AWRS No: XMAW00000100010<br />
+            VAT Registration No: GB168857155
+        </p>
+	</td>
+</tr>
 
 @endsection
