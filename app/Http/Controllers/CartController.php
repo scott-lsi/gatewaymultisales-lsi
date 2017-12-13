@@ -124,12 +124,20 @@ class CartController extends Controller
         }
         
         $order = $this->gatewayPrepare($request);
-        $this->gatewaySend($order);
+        //$this->gatewaySend($order);
         
         // email
         $view_data = [
             'name' => $request->input('name'),
             'basket' => \Cart::Content(),
+            'add1' => $request->input('add1'),
+            'add2' => $request->input('add2'),
+            'add3' => $request->input('add3'),
+            'add4' => $request->input('add4'),
+            'postcode' => $request->input('postcode'),
+            'country' => $request->input('country'),
+            'deliverydate' => $request->input('deliverydate'),
+            'notes' => $request->input('notes'),
         ];
         $email_data = [
             'name' => $request->input('name'),
