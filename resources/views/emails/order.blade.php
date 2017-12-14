@@ -1,5 +1,7 @@
 @extends('emails.master')
 
+@section('title', 'Label Order')
+
 @section('content')
 
 <tr>

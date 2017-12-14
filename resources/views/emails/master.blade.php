@@ -170,7 +170,7 @@
 								<a href="{{ URL::to('/') }}"><img src="{{ asset('images/emails/logo.png') }}" alt="J&auml;germeister Labels" style="display:block" border="0" /></a>
 							</td>
 							<td width="540" align="right" valign="bottom">
-								<p style="margin-top:0;font-size:22px;color:#E9E3C7;">Label Order</p>
+								<p style="margin-top:0;font-size:22px;color:#E9E3C7;">@yield('title')</p>
 							</td>
 						</tr>
 					</table>
