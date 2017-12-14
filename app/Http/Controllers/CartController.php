@@ -142,7 +142,7 @@ class CartController extends Controller
         $order->postcode = $request->input('postcode');
         $order->country = $request->input('country');
         $order->countrycode = $request->input('country');
-        $order->deliverydate = $request->input('deliverydate');
+        $order->deliverydate = date('Y-m-d', strtotime($request->input('deliverydate')));
         $order->recipient = $request->input('recipient');
         $order->basket = json_encode(Cart::content());
         $order->g3d = $g3d;
