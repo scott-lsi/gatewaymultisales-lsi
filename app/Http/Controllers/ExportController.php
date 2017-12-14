@@ -14,7 +14,7 @@ class ExportController extends Controller
         $today_formatted = $today->format('Y-m-d');
         $monthago_formatted = $today->sub($onemonth)->format('Y-m-d');
         
-        $orders = Order::all(); // get the orders
+        $orders = Order::where('created_at', '>=', $monthago_formatted)->where('created_at', '<=', $today_formatted)->get();
         
         $per_order = [];
         $per_product = [];
