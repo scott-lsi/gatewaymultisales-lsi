@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Cart;
 use App\Product;
+use App\Order;
 
 class CartController extends Controller
 {
@@ -123,11 +124,32 @@ class CartController extends Controller
             return redirect()->back()->withErrors($validator)->withInput();
         }
         
-        $order = $this->gatewayPrepare($request);
-        //$this->gatewaySend($order);
+        // make an orderid
+        $orderid = 'JG' . str_random(8);
+        
+        // prepare the artwork
+        $g3d = $this->gatewayPrepare($request, $orderid); 
+        
+        // create a new order for the db        
+        $order = new Order;
+        $order->orderid = $orderid;
+        $order->name = $request->input('name');
+        $order->email = $request->input('email');
+        $order->add1 = $request->input('add1');
+        $order->add2 = $request->input('add2');
+        $order->add3 = $request->input('add3');
+        $order->add4 = $request->input('add4');
+        $order->postcode = $request->input('postcode');
+        $order->country = $request->input('country');
+        $order->countrycode = $request->input('country');
+        $order->deliverydate = $request->input('deliverydate');
+        $order->recipient = $request->input('recipient');
+        $order->basket = json_encode(Cart::content());
+        $order->g3d = $g3d;
         
         // email
         $view_data = [
+            'orderid' => $request->input('name'),
             'name' => $request->input('name'),
             'basket' => \Cart::Content(),
             'add1' => $request->input('add1'),
@@ -144,7 +166,10 @@ class CartController extends Controller
             'email' => $request->input('email'),
         ];
         
-        $this->sendOrderEmail($view_data, $email_data);
+        // save it all and send things
+        $order->save();
+        //$this->gatewaySend($g3d);
+        //$this->sendOrderEmail($view_data, $email_data);
         
         Cart::destroy();
         
@@ -172,11 +197,9 @@ class CartController extends Controller
         return json_decode($json);
     }
     
-    private function gatewayPrepare(Request $request){
-        $ordernumber = 'JG' . str_random(8);
-        
+    private function gatewayPrepare(Request $request, $orderid){        
         $gatewayArray = [
-            'external_ref' => $ordernumber,
+            'external_ref' => $orderid,
             'company_ref_id' => env('GATEWAY_COMPANY'),
             'sale_datetime' => date('Y-m-d H:i:s'),
             
@@ -217,7 +240,7 @@ class CartController extends Controller
                 
                 $productArray = [
                     'sku' => $product->sku,
-                    'external_ref' => $ordernumber . '-' . str_pad($i, 2, '0', STR_PAD_LEFT),
+                    'external_ref' => $orderid . '-' . str_pad($i, 2, '0', STR_PAD_LEFT),
                     'description' => $row->name,
                     'quantity' => $row->qty,
                     'type' => 2, // 2 = Print Job (http://developers.gateway3d.com/Print-iT_Integration#Item_Type_Codes)
