@@ -168,8 +168,8 @@ class CartController extends Controller
         
         // save it all and send things
         $order->save();
-        //$this->gatewaySend($g3d);
-        //$this->sendOrderEmail($view_data, $email_data);
+        $this->gatewaySend($g3d);
+        $this->sendOrderEmail($view_data, $email_data);
         
         Cart::destroy();
         
@@ -280,10 +280,6 @@ class CartController extends Controller
 		}
 
 		curl_close($curl);
-		/**** send the order to g3d end ****/
-		
-		/*$order->gateway_response = $gatewayResponse;
-		$order->save();*/
     }
     
     private function sendOrderEmail($view_data, $email_data){
