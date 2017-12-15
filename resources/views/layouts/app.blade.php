@@ -42,8 +42,8 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
-                        <li><a href="{{ action('CartController@index') }}">Basket</a></li>
                         @if(session('accesscode'))
+                        <li><a href="{{ action('CartController@index') }}">Basket</a></li>
                         <li><a href="{{ action('PageController@logout') }}">Log Out</a></li>
                         @endif
                     </ul>
