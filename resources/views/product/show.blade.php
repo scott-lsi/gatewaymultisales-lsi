@@ -23,6 +23,7 @@
             {!! $product->description !!}
             
             <p>£{{ $product->price }}</p>
+            <p>Cost is per label + delivery.</p>
             
             @if($product->gateway)
             <p>You may personalise this product</p>
@@ -35,8 +36,6 @@
             
             <p><a href="{{ action('ProductController@personaliser', [json_decode($product->gatewaymulti, true)[1], $product->id]) }}" class="btn btn-primary">Personalise Now</a> </p>
             @endif
-            
-            
         </div>
     </div>
 </div>
