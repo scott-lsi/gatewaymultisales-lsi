@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Cummins Personaliser') }}</title>
+    <title>{{ config('app.name', 'Personaliser') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -37,10 +37,21 @@
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
                         <li><a href="{{ action('CartController@index') }}">Basket</a></li>
+                        @if(session('accesscode'))
+                        <li><a href="{{ action('PageController@logout') }}">Log Out</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>
         </nav>
+        
+        @if(session('message'))
+            <div class="container">
+                <div class="alert alert-{{ session('message.type')}}">
+                    {!! session('message.content') !!}
+                </div>
+            </div>
+        @endif
 
         @yield('content')
         
