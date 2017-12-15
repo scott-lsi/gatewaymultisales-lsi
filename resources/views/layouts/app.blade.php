@@ -28,9 +28,15 @@
                     </button>
 
                     <!-- Branding Image -->
+                    @if(session('accesscode'))
+                    <a class="navbar-brand" href="{{ action('ProductController@index') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                    @else
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
