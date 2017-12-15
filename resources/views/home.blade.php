@@ -7,9 +7,7 @@
     
     <hr>
     
-    {{ Cookie::get('accesscode') }}
-    
-    @if(Cookie::get('accesscode') !== env('ACCESS_CODE'))
+    @if(session('accesscode') !== env('ACCESS_CODE'))
     <div class="row">
         <div class="col-sm-6 col-md-4 col-lg-3">
             {!! Form::open(['action' => 'PageController@postAccessCode']) !!}
@@ -22,7 +20,8 @@
         </div>
     </div>
     @else
-    You are logged in
+    <h3>You are logged in</h3>
+    <p><a href="{{ action('ProductController@index') }}" class="btn btn-md btn-primary">Click to view the product list</a></p>
     @endif
     
     
