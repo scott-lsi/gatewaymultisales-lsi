@@ -36,6 +36,17 @@
                         <td>
                             <p>{{ $row->name }}</p>
                             
+                            @if($row->options->textinputs)
+                            <p>
+                            <strong>Text to be printed</strong><br>
+                            <?php $i = 1; ?>
+                            @foreach($row->options->textinputs as $textinput)
+                            Text {{ $i }}: {{ $textinput }}<br>
+                            <?php $i++; ?>
+                            @endforeach
+                            </p>
+                            @endif
+                            
                             {!! Form::open(['action' => ['CartController@postUpdateQty', $row->rowId]]) !!}
                             <div class="row">
                                 <div class="col-xs-6">

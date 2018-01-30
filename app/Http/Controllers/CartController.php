@@ -19,6 +19,12 @@ class CartController extends Controller
     }
     
     public function add(Request $request, $gatewaymultiId = null){
+        // get what's been typed in
+        $textInputs = array_filter(json_decode($_POST['data'], true), function($key){
+            return strpos($key, 'userText') === 0 && !strpos($key, '_');
+        }, ARRAY_FILTER_USE_KEY);
+        ksort($textInputs);
+        
         // artwork
         $gateway = $this->gatewayAdd($_POST['data']);
         $product = Product::where('sku', $gateway->sku)->first();
@@ -30,6 +36,7 @@ class CartController extends Controller
         $options = [];
         $options['printjobid'] = $gateway->printJobId;
         $options['imageurl'] = $gateway->thumburl;
+        $options['textinputs'] = $textInputs;
         
         Cart::add(
             $product->id, 
@@ -197,7 +204,7 @@ class CartController extends Controller
         return json_decode($json);
     }
     
-    private function gatewayPrepare(Request $request, $orderid){        
+    private function gatewayPrepare(Request $request, $orderid){
         $gatewayArray = [
             'external_ref' => $orderid,
             'company_ref_id' => env('GATEWAY_COMPANY'),
@@ -283,9 +290,15 @@ class CartController extends Controller
     }
     
     private function sendOrderEmail($view_data, $email_data){
-        \Mail::send('emails.order', $view_data, function($message) use($email_data) {
+        if(strpos(env('ORDER_MAIL_BCC', false), ',')){
+            $bcc = explode(',', env('ORDER_MAIL_BCC', false));
+        } else {
+            $bcc = env('ORDER_MAIL_BCC', false);
+        }
+        
+        \Mail::send('emails.order', $view_data, function($message) use($email_data, $bcc) {
             $message->to($email_data['email'], $email_data['name'])
-                    ->bcc(env('ORDER_MAIL_BCC', false))
+                    ->bcc($bcc)
                     ->subject('Your order for Jägermeister labels');
         });
     }

@@ -25,4 +25,26 @@ class PageController extends Controller
         session()->forget('accesscode');
         return redirect()->back();
     }
+    
+    public function test(){
+        echo env('ORDER_MAIL_BCC', false) . '<br>';
+        echo env('ORDER_MAIL_BCC');
+        
+        if(strpos(env('ORDER_MAIL_BCC', false), ',')){
+            $bcc = explode(',', env('ORDER_MAIL_BCC', false));
+        } else {
+            $bcc = env('ORDER_MAIL_BCC', false);
+        }
+        
+        //dd($bcc);
+        
+        $view_data = [];
+        $email_data = [];
+        
+        \Mail::send('emails.test', $view_data, function($message) use($email_data, $bcc) {
+            $message->to('tuestunim@gmail.com', 'Scott Brown')
+                    ->bcc($bcc)
+                    ->subject('Jägermeister labels test email');
+        });
+    }
 }
