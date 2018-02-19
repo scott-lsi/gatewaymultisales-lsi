@@ -1,0 +1,285 @@
+/***
+PPB styling
+***/
+/** things that use the sprite **/
+#page-sidebar button.rotate-left, #page-sidebar button.rotate-right, #page-sidebar button.reset, #page-sidebar button.move-up, #page-sidebar button.move-down, #page-sidebar button.move-left, #page-sidebar button.move-right, #page-sidebar button.zoom-in, #page-sidebar button.zoom-out, #page-sidebar div#add-image, #page-sidebar div#remove-background, #page-sidebar button.reset-full, #page-sidebar div.quantity-modifier, #add-to-cart, .styled-select, .box header {
+	background: url(../images/acp2sprite.png) no-repeat;
+}
+
+/** sidebar **/
+#page-sidebar {
+	width: 320px;
+	background: url(../images/jager_sidebar.jpg) right top;
+     padding-top: 100px;
+	box-sizing: border-box;
+}
+
+/** keep the product in one place **/
+#page-content {
+	position: fixed;
+}
+
+/** boxes **/
+.box header {
+	background-position: right -175px;
+}
+
+.box header img {
+	display: none;
+}
+
+#product-info-description {
+	font-size: 11px;
+}
+
+#help-outer-container {
+	font-size: 100%;
+}
+
+/* no box expand */
+.quantity-tab header, #add-to-cart header {
+	background-image: none;
+}
+
+/** controls **/
+/* buttons */
+#page-sidebar button.rotate-left, #page-sidebar button.rotate-right, #page-sidebar button.reset, #page-sidebar button.move-up, #page-sidebar button.move-down, #page-sidebar button.move-left, #page-sidebar button.move-right, #page-sidebar button.zoom-in, #page-sidebar button.zoom-out, #page-sidebar div#add-image, #page-sidebar div#remove-background, #page-sidebar button.reset-full, #page-sidebar div.quantity-modifier, #add-to-cart, .styled-select {
+	background-color: #DD5A12;
+	transition: all 300ms ease 0s;
+	cursor: pointer;
+}
+
+#page-sidebar div.quantity-modifier {
+	background-color: transparent;
+}
+
+#page-sidebar button.rotate-left:hover, #page-sidebar button.rotate-right:hover, #page-sidebar button.reset:hover, #page-sidebar button.move-up:hover, #page-sidebar button.move-down:hover, #page-sidebar button.move-left:hover, #page-sidebar button.move-right:hover, #page-sidebar button.zoom-in:hover, #page-sidebar button.zoom-out:hover, #page-sidebar div#add-image:hover, #page-sidebar div#remove-background:hover, #page-sidebar button.reset-full:hover, #add-to-cart:hover, .styled-select:hover {
+	background-color: #DD5A12;
+}
+
+/* button background positions */
+#page-sidebar button.rotate-left	{ background-position: -90px 0; }
+#page-sidebar button.rotate-right	{ background-position: -120px 0; }
+#page-sidebar button.move-up		{ background-position: -240px 0; }
+#page-sidebar button.move-down		{ background-position: -270px 0; }
+#page-sidebar button.move-left		{ background-position: -180px 0; }
+#page-sidebar button.move-right		{ background-position: -210px 0; }
+#page-sidebar button.zoom-in		{ background-position: 0 0; }
+#page-sidebar button.zoom-out		{ background-position: -30px 0; }
+#page-sidebar div#add-image			{ background-position: 0 -30px; }
+#page-sidebar div#add-image div 	{ display: none; } /* remove text if on sprite */
+#page-sidebar div#remove-background { background-position: -110px -30px; }
+#page-sidebar button.reset-full		{ background-position: -330px 0; }
+#page-sidebar div.quantity-inc		{ background-position: -390px 0; }
+#page-sidebar div.quantity-dec		{ background-position: -360px 0; }
+
+/* resets */
+#image-areas-container button[title="Reset Zoom"] { background-position: -60px 0px; }
+#current-text-area-container button[title="Reset Rotation"], #image-areas-container button[title="Reset Rotation"] { background-position: -150px 0px; }
+#current-text-area-container button[title="Reset Position"], #image-areas-container button[title="Reset Position"] { background-position: -300px 0px; }
+
+.controls button.reset {
+	float: none;
+}
+
+/* button hover effects */
+button:hover, .colour-panel .colour-box:hover, textarea:focus, .styled-select:hover {
+	box-shadow: 0 0 3px #DD5A12;
+	border: 1px solid #DD5A12;
+}
+
+/* add to cart */
+#add-to-cart {
+	background-position: -300px -106px;
+	color: #E9E3C7;
+	text-indent: 30px;
+	background-color: #DD5A12;
+}
+
+#add-to-cart:hover {
+	background-color: #CD4A02;
+}
+
+#add-to-cart img {
+	display: none;
+}
+
+/* select dropdowns */
+select, option {
+	color: #E9E3C7;
+}
+
+option {
+	color: #3B5239;
+}
+
+option:hover {
+	color: #E9E3C7;
+	background: #3B5239;
+}
+
+.styled-select {
+	background-position: right -66px;
+}
+
+.styled-select select {
+	color: #E9E3C7;
+	cursor: pointer;
+}
+
+.styled-select ul {
+	background: #3B5239;
+	max-height: 270px;
+}
+
+.styled-select img {
+	filter: invert(100%);
+	-webkit-filter: invert(100%);
+}
+
+.styled-select ul li:hover, .styled-select option:hover {
+	background: #3B5239;
+}
+
+.styled-select ul li img {
+	width: 60%;
+}
+
+.styled-select ul li:hover img {
+	filter: none;
+	-webkit-filter: none;
+}
+
+/* ie11 & edge rollbacks (no filter support) */
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+	.styled-select, .styled-select:hover { background-color: #FFF; background-position: right -137px; }
+	.styled-select select, .styled-select option { color: #E9E3C7; }
+	.styled-select ul { background-color: #FFF; }
+	.styled-select img { filter: none; }
+}
+
+/* edge */
+@supports (-ms-accelerator:true) {
+	.styled-select, .styled-select:hover { background-color: #FFF; background-position: right -137px; }
+	.styled-select select, .styled-select option { color: #E9E3C7; }
+	.styled-select ul { background-color: #FFF; }
+	.styled-select img { filter: none; }
+}
+
+/** text **/
+.text-area-input {
+	padding: 3px;
+	box-sizing: border-box;
+}
+
+.font-img {
+	height: 80%;
+	width: auto;
+	padding: 3px;
+}
+
+.colour-panel {
+	max-height: 130px;
+}
+
+.colour-panel .colour-box {
+	width: 20px;
+	height: 20px;
+}
+
+
+/** themes **/
+/* blue theme... */
+/*article.box {
+	background: #CEF;
+	border-radius: 3px;
+	padding: 5px;
+	box-shadow: none;
+	border: none;
+}*/
+
+/* yellow theme... */
+html, body {
+	width: 100%;
+	height: 100%;
+}
+
+#page-sidebar {
+	top: 0;
+	right: 0;
+	min-height: 100%;
+	background-color: #3B5239;
+	color: #e9e3c7;
+}
+
+article.box {
+	background: #fafafa;
+	border-radius: 3px;
+	padding: 5px;
+	box-shadow: none;
+	border: none;
+	color: #3B5239;
+}
+
+/* grey theme... */
+/*article.box {
+	background: #fafafa;
+	border: 1px solid #f2f2f2;
+	border-radius: 3px;
+	padding: 5px;
+	box-shadow: none;
+}*/
+
+/* image uploader */
+#add-image-popup .add-image-method.my-computer > div {
+	background-image: url("../images/computer-symbolic.png");
+}
+
+#add-image-popup .add-image-method.google-plus > div {
+	background-image: url("../images/google-plus.png");
+}
+
+#add-image-popup .add-image-method.instagram > div {
+	background-image: url("../images/instagram.png");
+}
+
+#add-image-popup .add-image-method.facebook > div {
+	background-image: url("../images/facebook.png");
+}
+
+#add-image-popup .add-image-method.flickr > div {
+	background-image: url("../images/flickr.png");
+}
+
+#add-image-popup .add-image-method.openclipart > div {
+	background-image: url("../images/openclipart.png");
+}
+
+#add-image-popup .add-image-method.dropbox > div {
+	background-image: url("../images/dropbox.png");
+}
+
+#add-image-popup .add-image-method.google-drive > div {
+	background-image: url("../images/google-drive.png");
+}
+
+#add-image-popup .add-image-method.one-drive > div {
+	background-image: url("../images/one-drive.png");
+}
+
+#add-image-popup .add-image-method.qr > div {
+	background-image: url("../images/qr.png");
+}
+
+#add-image-popup .add-image-method.fotolia > div {
+	background-image: url("../images/fotolia.png");
+}
+
+#add-image-popup .add-image-method.pixabay > div {
+	background-image: url("../images/pixabay.png");
+}
+
+/* hides */
+#product-info-price, #pricing-summary, #bottom-prices {
+	display: none;
+}
