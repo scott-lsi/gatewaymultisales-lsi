@@ -14,8 +14,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        //$products = Product::all();
-        $products = Product::whereNull('gateway')->get();
+        $products = Product::orderBy('name')->get();
+        //$products = Product::whereNull('gateway')->get();
         
         return view('product.index', [
            'products' => $products,

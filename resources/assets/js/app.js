@@ -6,6 +6,8 @@
  */
 
 require('./bootstrap');
+require('../../../node_modules/bootstrap-datepicker/dist/js/bootstrap-datepicker.min.js');
+require('./gm_functions.js');
 
 //window.Vue = require('vue');
 

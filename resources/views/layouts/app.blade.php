@@ -8,7 +8,7 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>{{ config('app.name', 'Cummins Personaliser') }}</title>
+    <title>{{ config('app.name', 'Personaliser') }}</title>
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
@@ -28,19 +28,36 @@
                     </button>
 
                     <!-- Branding Image -->
+                    @if(session('accesscode'))
+                    <a class="navbar-brand" href="{{ action('ProductController@index') }}">
+                        {{ config('app.name', 'Laravel') }}
+                    </a>
+                    @else
                     <a class="navbar-brand" href="{{ url('/') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
+                    @endif
                 </div>
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav">
+                        @if(session('accesscode'))
                         <li><a href="{{ action('CartController@index') }}">Basket</a></li>
+                        <li><a href="{{ action('PageController@logout') }}">Log Out</a></li>
+                        @endif
                     </ul>
                 </div>
             </div>
         </nav>
+        
+        @if(session('message'))
+            <div class="container">
+                <div class="alert alert-{{ session('message.type')}}">
+                    {!! session('message.content') !!}
+                </div>
+            </div>
+        @endif
 
         @yield('content')
         

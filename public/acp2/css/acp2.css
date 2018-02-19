@@ -9,8 +9,9 @@ PPB styling
 /** sidebar **/
 #page-sidebar {
 	width: 320px;
-	/*background: url(../images/bg.png) center center;*/
-     
+	background: url(../images/jager_sidebar.jpg) right top;
+     padding-top: 100px;
+	box-sizing: border-box;
 }
 
 /** keep the product in one place **/
@@ -43,7 +44,7 @@ PPB styling
 /** controls **/
 /* buttons */
 #page-sidebar button.rotate-left, #page-sidebar button.rotate-right, #page-sidebar button.reset, #page-sidebar button.move-up, #page-sidebar button.move-down, #page-sidebar button.move-left, #page-sidebar button.move-right, #page-sidebar button.zoom-in, #page-sidebar button.zoom-out, #page-sidebar div#add-image, #page-sidebar div#remove-background, #page-sidebar button.reset-full, #page-sidebar div.quantity-modifier, #add-to-cart, .styled-select {
-	background-color: #FF0000;
+	background-color: #DD5A12;
 	transition: all 300ms ease 0s;
 	cursor: pointer;
 }
@@ -53,7 +54,7 @@ PPB styling
 }
 
 #page-sidebar button.rotate-left:hover, #page-sidebar button.rotate-right:hover, #page-sidebar button.reset:hover, #page-sidebar button.move-up:hover, #page-sidebar button.move-down:hover, #page-sidebar button.move-left:hover, #page-sidebar button.move-right:hover, #page-sidebar button.zoom-in:hover, #page-sidebar button.zoom-out:hover, #page-sidebar div#add-image:hover, #page-sidebar div#remove-background:hover, #page-sidebar button.reset-full:hover, #add-to-cart:hover, .styled-select:hover {
-	background-color: #CC0000;
+	background-color: #DD5A12;
 }
 
 /* button background positions */
@@ -83,21 +84,20 @@ PPB styling
 
 /* button hover effects */
 button:hover, .colour-panel .colour-box:hover, textarea:focus, .styled-select:hover {
-	box-shadow: 0 0 3px #CC0000;
-	border: 1px solid #CC0000;
+	box-shadow: 0 0 3px #DD5A12;
+	border: 1px solid #DD5A12;
 }
 
 /* add to cart */
 #add-to-cart {
 	background-position: -300px -106px;
-	color: #FFF;
+	color: #E9E3C7;
 	text-indent: 30px;
-	background-color: #FF0000;
+	background-color: #DD5A12;
 }
 
 #add-to-cart:hover {
-	background-color: #CC0000;
-	color: #FFF;
+	background-color: #CD4A02;
 }
 
 #add-to-cart img {
@@ -106,12 +106,16 @@ button:hover, .colour-panel .colour-box:hover, textarea:focus, .styled-select:ho
 
 /* select dropdowns */
 select, option {
-	color: #FF0000;
+	color: #E9E3C7;
+}
+
+option {
+	color: #3B5239;
 }
 
 option:hover {
-	color: #FF0000;
-	background: #EEEEEE;
+	color: #E9E3C7;
+	background: #3B5239;
 }
 
 .styled-select {
@@ -119,12 +123,12 @@ option:hover {
 }
 
 .styled-select select {
-	color: #FFF;
+	color: #E9E3C7;
 	cursor: pointer;
 }
 
 .styled-select ul {
-	background: #FF0000;
+	background: #3B5239;
 	max-height: 270px;
 }
 
@@ -134,7 +138,7 @@ option:hover {
 }
 
 .styled-select ul li:hover, .styled-select option:hover {
-	background: #f9b2dc;
+	background: #3B5239;
 }
 
 .styled-select ul li img {
@@ -149,7 +153,7 @@ option:hover {
 /* ie11 & edge rollbacks (no filter support) */
 @media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
 	.styled-select, .styled-select:hover { background-color: #FFF; background-position: right -137px; }
-	.styled-select select, .styled-select option { color: #FF0000; }
+	.styled-select select, .styled-select option { color: #E9E3C7; }
 	.styled-select ul { background-color: #FFF; }
 	.styled-select img { filter: none; }
 }
@@ -157,7 +161,7 @@ option:hover {
 /* edge */
 @supports (-ms-accelerator:true) {
 	.styled-select, .styled-select:hover { background-color: #FFF; background-position: right -137px; }
-	.styled-select select, .styled-select option { color: #FF0000; }
+	.styled-select select, .styled-select option { color: #E9E3C7; }
 	.styled-select ul { background-color: #FFF; }
 	.styled-select img { filter: none; }
 }
@@ -204,8 +208,8 @@ html, body {
 	top: 0;
 	right: 0;
 	min-height: 100%;
-	background-color: #000000;
-	color: #FFF;
+	background-color: #3B5239;
+	color: #e9e3c7;
 }
 
 article.box {
@@ -214,7 +218,7 @@ article.box {
 	padding: 5px;
 	box-shadow: none;
 	border: none;
-	color: #FF0000;
+	color: #3B5239;
 }
 
 /* grey theme... */
