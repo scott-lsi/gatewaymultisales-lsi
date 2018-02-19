@@ -1412,7 +1412,7 @@ body {
   font-size: 14px;
   line-height: 1.42857143;
   color: #333333;
-  background-color: #F0F0F0;
+  background-color: #FAFAFA;
 }
 
 input,
@@ -1461,7 +1461,7 @@ img {
 .img-thumbnail {
   padding: 4px;
   line-height: 1.42857143;
-  background-color: #F0F0F0;
+  background-color: #FAFAFA;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: all 0.2s ease-in-out;
@@ -3060,7 +3060,7 @@ th {
 }
 
 .table .table {
-  background-color: #F0F0F0;
+  background-color: #FAFAFA;
 }
 
 .table-condensed > thead > tr > th,
@@ -5151,7 +5151,7 @@ tbody.collapse.in {
 .nav-tabs > li.active > a:hover,
 .nav-tabs > li.active > a:focus {
   color: #555555;
-  background-color: #F0F0F0;
+  background-color: #FAFAFA;
   border: 1px solid #ddd;
   border-bottom-color: transparent;
   cursor: default;
@@ -5252,7 +5252,7 @@ tbody.collapse.in {
   .nav-tabs.nav-justified > .active > a:hover,
   .nav-tabs-justified > .active > a:focus,
   .nav-tabs.nav-justified > .active > a:focus {
-    border-bottom-color: #F0F0F0;
+    border-bottom-color: #FAFAFA;
   }
 }
 
@@ -6320,7 +6320,7 @@ a.badge:focus {
   padding: 4px;
   margin-bottom: 20px;
   line-height: 1.42857143;
-  background-color: #F0F0F0;
+  background-color: #FAFAFA;
   border: 1px solid #ddd;
   border-radius: 4px;
   -webkit-transition: border 0.2s ease-in-out;

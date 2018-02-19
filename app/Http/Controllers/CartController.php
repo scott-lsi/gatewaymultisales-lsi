@@ -51,14 +51,9 @@ class CartController extends Controller
             $gatewaymultiProduct = Product::find($gatewaymultiId);
             $gatewaymultiGateways = json_decode($gatewaymultiProduct->gatewaymulti, true);
             
-            var_dump($gatewaymultiGateways);
             $thisId = array_search($product->id, $gatewaymultiGateways);
         
             if(array_key_exists($thisId+1, $gatewaymultiGateways)){
-                /*echo $gatewaymultiGateways[$thisId+1];
-                echo '<br>';
-                echo $gatewaymultiId;
-                return;*/
                 return redirect()->action('CartController@gatewayRedir', [$gatewaymultiGateways[$thisId+1], $gatewaymultiId]);
             }
         }
@@ -105,25 +100,15 @@ class CartController extends Controller
 	public function postToPrint(Request $request){
         $validatorRules = [
             'name' =>               'required',
+            'company' =>            'required',
             'email' =>              'required|email',
-            'recipient' =>          'required',
-            'add1' =>               'required',
-            'add3' =>               'required',
-            'postcode' =>           'required',
-            'country' =>            'required',
-            'terms' =>              'required',
         ];
         
         $validatorMessages = [
-            'name.required' => 'Please enter your name',
+            'name.required' => 'Please ensure you have entered a recipient name',
+            'company.required' => 'Please ensure you have entered a company name',
             'email.required' => 'Please enter your email address',
             'email.email' => 'Please enter a valid email address',
-            'recipient.required' => 'Please ensure you have entered a recipient name',
-            'add1.required' => 'Please ensure you have entered at least the 1st line of the delivery address',
-            'add3.required' => 'Please ensure you have entered at town/city of the delivery address',
-            'postcode.required' => 'Please ensure you have entered at least the postcode of the delivery address',
-            'country.required' => 'Please choose a country from the delivery address dropdown menu',
-            'terms.required' => 'Please indicate that you have checked any uploaded logos and are happy with the quality',
         ];
         
         $validator = \Validator::make($request->all(), $validatorRules, $validatorMessages);
@@ -132,7 +117,7 @@ class CartController extends Controller
         }
         
         // make an orderid
-        $orderid = 'JG' . str_random(8);
+        $orderid = env('ORDERID_PREFIX') . '-' . str_random(5);
         
         // prepare the artwork
         $g3d = $this->gatewayPrepare($request, $orderid); 
@@ -141,32 +126,17 @@ class CartController extends Controller
         $order = new Order;
         $order->orderid = $orderid;
         $order->name = $request->input('name');
+        $order->company = $request->input('company');
         $order->email = $request->input('email');
-        $order->add1 = $request->input('add1');
-        $order->add2 = $request->input('add2');
-        $order->add3 = $request->input('add3');
-        $order->add4 = $request->input('add4');
-        $order->postcode = $request->input('postcode');
-        $order->country = $request->input('country');
-        $order->countrycode = $request->input('country');
-        $order->deliverydate = date('Y-m-d', strtotime($request->input('deliverydate')));
-        $order->recipient = $request->input('recipient');
         $order->basket = json_encode(Cart::content());
         $order->g3d = $g3d;
         
         // email
         $view_data = [
-            'orderid' => $request->input('name'),
+            'orderid' => $orderid,
             'name' => $request->input('name'),
+            'company' => $request->input('company'),
             'basket' => \Cart::Content(),
-            'add1' => $request->input('add1'),
-            'add2' => $request->input('add2'),
-            'add3' => $request->input('add3'),
-            'add4' => $request->input('add4'),
-            'postcode' => $request->input('postcode'),
-            'country' => $request->input('country'),
-            'deliverydate' => $request->input('deliverydate'),
-            'notes' => $request->input('notes'),
         ];
         $email_data = [
             'name' => $request->input('name'),
@@ -299,7 +269,7 @@ class CartController extends Controller
         \Mail::send('emails.order', $view_data, function($message) use($email_data, $bcc) {
             $message->to($email_data['email'], $email_data['name'])
                     ->bcc($bcc)
-                    ->subject('Your order for Jägermeister labels');
+                    ->subject(env('EMAIL_ORDER_SUBJECT'));
         });
     }
 }

@@ -47,7 +47,7 @@
 					   Another option:  Use double BRs instead of paragraphs */				
 				
 			   h1, h2, h3, h4, h5, h6 {
-				   color: #3B5239; 
+				   color: #EC008C; 
 				   line-height: 100%; 
 				   }  /* This CSS will overwrite Outlook.com/Outlook.com's default CSS and make your headings appear consistent with Gmail.  
 				   From there, you can overwrite your styles inline if needed.  */
@@ -63,7 +63,7 @@
 	   /****** EDITABLE STYLES        ********/
 
 			body, #body_style {
-                background: #E9E3C7;
+                background: #F0F0F0;
 				min-height:1000px;
 				color:#444;
 				font-family:Arial, Helvetica, sans-serif;
@@ -86,9 +86,9 @@
 			
 									
 			  /*Optional:*/
-			  a:visited { color: #DD5A12; text-decoration: none} 
-			  a:focus   { color: #DD5A12; text-decoration: underline}  
-			  a:hover   { color: #DD5A12; text-decoration: underline}  
+			  a:visited { color: #EC008C; text-decoration: none} 
+			  a:focus   { color: #EC008C; text-decoration: underline}  
+			  a:hover   { color: #EC008C; text-decoration: underline}  
 				/* There is no way to set these inline so you have the option of adding pseudo class definitions here. They won't 
 				work for Gmail nor older versions of Lotus Notes but it's a nice addition for all other clients. */
 				
@@ -155,7 +155,7 @@
 
 </head>
 
-<body style="background: #E9E3C7; min-height:1000px; color:#3B5239;font-family:Arial, Helvetica, sans-serif; font-size:13px" alink="#DD5A12" link="#DD5A12" bgcolor="#e9e3c7" text="#3b5239" yahoo="fix"> 
+<body style="background: #F0F0F0; min-height:1000px; color:#444444;font-family:Arial, Helvetica, sans-serif; font-size:13px" alink="#EC008C" link="#EC008C" bgcolor="#F0F0F0" text="#444444" yahoo="fix"> 
 	
     <!--PAGE WRAPPER-->
     <div id="body_style" style="padding:15px"> 
@@ -164,13 +164,13 @@
         <table cellpadding="0" cellspacing="0" border="0" width="600" align="center">
 			<tr>
 				<td>
-					<table cellpadding="10" cellspacing="0" border="0" bgcolor="#3b5239" width="600" align="center">
+					<table cellpadding="10" cellspacing="0" border="0" width="600" align="center">
 						<tr>
 							<td width="60" align="left">
-								<a href="{{ URL::to('/') }}"><img src="{{ asset('images/emails/logo.png') }}" alt="J&auml;germeister Labels" style="display:block" border="0" /></a>
+								<a href="http://lsi.co.uk"><img src="{{ asset('images/emails/logo.png') }}" alt="{{ env('APP_NAME') }}" style="display:block" border="0" /></a>
 							</td>
 							<td width="540" align="right" valign="bottom">
-								<p style="margin-top:0;font-size:22px;color:#E9E3C7;">@yield('title')</p>
+								<p style="margin-top:0;font-size:18px;color:#EC008C;">@yield('title')</p>
 							</td>
 						</tr>
 					</table>

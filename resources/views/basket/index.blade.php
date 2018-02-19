@@ -23,10 +23,8 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th class="col-xs-4">Image</th>
-                        <th class="col-xs-4">Product Name</th>
-                        <th class="col-xs-2">Price</th>
-                        <th class="col-xs-2">Total</th>
+                        <th class="col-xs-3">Image</th>
+                        <th class="col-xs-9">Product Name</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -61,17 +59,9 @@
                             
                             <p><small><a href="{{ action('CartController@getRemoveItem', ['rowId' => $row->rowId]) }}">Remove</a></small></p>
                         </td>
-                        <td>&pound;{{ number_format($row->price, 2) }}</td>
-                        <td>&pound;{{ number_format($row->subtotal, 2) }}</td>
                     </tr>
                     @endforeach
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="3" class="text-right">Total:</td>
-                        <td>£{{ \Cart::total(2) }}</td>
-                    </tr>
-                </tfoot>
             </table>
         </div>
         
@@ -82,75 +72,21 @@
                 <div class="panel-body">
                     {!! Form::open(['action' => 'CartController@postToPrint']) !!}
                         <div class="form-group">
-                            <label for="name">Your Name *</label>
+                            <label for="name">Recipient Name *</label>
                             {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) !!}
                         </div>
+                    
+                        <div class="form-group">
+                            <label for="name">Recipient Company *</label>
+                            {!! Form::text('company', null, ['class' => 'form-control', 'id' => 'company']) !!}
+                        </div>
 
                         <div class="form-group">
-                            <label for="email">Your Email Address *</label>
+                            <label for="email">Recipient Email Address *</label>
                             {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
                         </div>
-                    
-                        <hr>
-                    
-                        <h4>Delivery Info</h4>
-
-                        <div class="form-group">
-                            <label for="recipient">Recipient Name *</label>
-                            {!! Form::text('recipient', null, ['class' => 'form-control', 'id' => 'recipient']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Address Line 1 *</label>
-                            {!! Form::text('add1', null, ['class' => 'form-control', 'id' => 'add1']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Address Line 2</label>
-                            {!! Form::text('add2', null, ['class' => 'form-control', 'id' => 'add2']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Town/City *</label>
-                            {!! Form::text('add3', null, ['class' => 'form-control', 'id' => 'add3']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">County</label>
-                            {!! Form::text('add4', null, ['class' => 'form-control', 'id' => 'add4']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Postcode *</label>
-                            {!! Form::text('postcode', null, ['class' => 'form-control', 'id' => 'postcode']) !!}
-                        </div>
-                    
-                        <div class="form-group">
-                            <label for="country">Country *</label>
-                            {!! Form::select('country', $countries, 'GB', ['class' => 'form-control country', 'id' => 'country']) !!}
-                        </div>
-                    
-                        <hr>
-                    
-                        <h4>Additional Details</h4>
-
-                        <div class="form-group">
-                            <label for="email">Event Date</label>
-                            {!! Form::text('deliverydate', null, ['class' => 'form-control datepicker', 'id' => 'deliverydate']) !!}
-                        </div>
-
-                        <div class="form-group">
-                            <label for="email">Notes</label>
-                            {!! Form::textarea('notes', null, ['class' => 'form-control', 'id' => 'notes', 'rows' => 3]) !!}
-                        </div>
 
                         <hr>
-                    
-                        <div class="checkbox">
-                            <label>
-                                {!! Form::checkbox('terms', 'agree') !!} I have checked any uploaded logos and am happy with the quality
-                            </label>
-                        </div>
 
                         {!! Form::submit('Place Order', ['class' => 'btn btn-block btn-primary']) !!}
                     {!! Form::close() !!}
@@ -159,7 +95,6 @@
             @endif
         </div>
     </div>
-    
     
 </div>
 
