@@ -3,7 +3,7 @@
 @section('content')
 
 <div class="container">
-    <h1>Welcome to the J&auml;germeister Label Personaliser</h1>
+    <h1>LSi at the Souvenirs, Memorabilia &amp; Merchandise Exhibition</h1>
     
     <hr>
     

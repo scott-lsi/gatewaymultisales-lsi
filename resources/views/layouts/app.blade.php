@@ -64,7 +64,7 @@
         <footer id="footer">
             <div class="container">
                 <hr>
-                &copy; LSi 2017 @if(date('Y') !== '2017') &ndash; {{ date('Y') }} @endif
+                &copy; LSi 2018 @if(date('Y') !== '2018') &ndash; {{ date('Y') }} @endif
             </div>
         </footer>
     </div>

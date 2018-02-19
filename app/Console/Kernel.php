@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
-        $schedule->call('\App\Http\Controllers\ExportController@exportOrders')->name('exportOrders')->monthlyon(1, '08:00');
+        //$schedule->call('\App\Http\Controllers\ExportController@exportOrders')->name('exportOrders')->monthlyon(1, '08:00');
     }
 
     /**
