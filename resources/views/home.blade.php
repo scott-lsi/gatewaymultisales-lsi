@@ -13,7 +13,7 @@
             {!! Form::open(['action' => 'PageController@postAccessCode']) !!}
                 <div class="form-group">
                     {!! Form::label('accesscode', 'Please enter your access code') !!}
-                    {!! Form::text('accesscode', null, ['class' => 'form-control']) !!}
+                    {!! Form::password('accesscode', null, ['class' => 'form-control']) !!}
                 </div>
                 {!! Form::submit('Submit', ['class' => 'btn btn-primary']) !!}
             {!! Form::close() !!}
