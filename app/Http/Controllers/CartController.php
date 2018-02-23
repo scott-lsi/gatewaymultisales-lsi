@@ -180,31 +180,31 @@ class CartController extends Controller
             'company_ref_id' => env('GATEWAY_COMPANY'),
             'sale_datetime' => date('Y-m-d H:i:s'),
             
-            'customer_name' => $request->input('recipient'),
+            'customer_name' => $request->input('name'),
             'customer_email' => $request->input('email'),
 			
-			'shipping_address_1' =>	$request->input('add1'),
-			'shipping_address_2' =>	$request->input('add2'),
-			'shipping_address_3' =>	$request->input('add3'),
-			'shipping_address_4' =>	$request->input('add4'),
+			'shipping_address_1' =>	$request->input('company'),
+			'shipping_address_2' =>	'',
+			'shipping_address_3' =>	'',
+			'shipping_address_4' =>	'',
 			'shipping_address_5' =>	'',
-			'shipping_postcode' =>	$request->input('postcode'),
-			'shipping_country' =>	$request->input('country'),
-			'shipping_country_code' => $request->input('country'),
+			'shipping_postcode' =>	'',
+			'shipping_country' =>	'',
+			'shipping_country_code' => '',
 			
 			'shipping_method' =>	'',
 			'shipping_carrier' =>	'',
 			'shipping_tracking' =>	'',
 			
-			'billing_address_1' =>	$request->input('name') . '(' . $request->input('email') . ')',
-			'billing_address_2' =>	$request->input('deliverydate'),
-			'billing_address_3' =>	$request->input('notes'),
+			'billing_address_1' =>	'',
+			'billing_address_2' =>	'',
+			'billing_address_3' =>	'',
 			'billing_address_4' =>	'',
 			'billing_address_5' =>	'',
 			'billing_postcode' =>	'',
 			'billing_country' =>	'',
 			
-			'payment_trans_id' =>	'0123456789ABC',
+			'payment_trans_id' =>	'',
 			
 			'items' =>				[],
         ];
