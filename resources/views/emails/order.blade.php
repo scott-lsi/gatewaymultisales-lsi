@@ -10,6 +10,12 @@
 	</td>
 </tr>
 
+<tr>
+	<td>
+        <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Thank you for visiting us at SMMEX. Your personalised product will be despatched to you within the next couple of days.</p>
+	</td>
+</tr>
+
 @foreach($basket as $row)
 <tr>
 	<td>

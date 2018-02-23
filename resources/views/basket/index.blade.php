@@ -37,10 +37,8 @@
                             @if($row->options->textinputs)
                             <p>
                             <strong>Text to be printed</strong><br>
-                            <?php $i = 1; ?>
                             @foreach($row->options->textinputs as $textinput)
-                            Text {{ $i }}: {{ $textinput }}<br>
-                            <?php $i++; ?>
+                            {{ $textinput }}<br>
                             @endforeach
                             </p>
                             @endif
