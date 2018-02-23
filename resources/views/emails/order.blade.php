@@ -7,11 +7,6 @@
 <tr>
 	<td>
         <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Hi {{ $name }},</p>
-	</td>
-</tr>
-
-<tr>
-	<td>
         <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Thank you for visiting us at SMMEX. Your personalised product will be despatched to you within the next couple of days.</p>
 	</td>
 </tr>
@@ -25,7 +20,7 @@
 				    <img src="{{ $row->options->imageurl }}" width="80" height="80" alt="{{ $row->name }}">
 				</td>
 				<td>
-					<p style="margin-top:0;margin-bottom:5px;font-size:20px;color:#DD5A12;">{{ $row->name }}</p>
+					<p style="margin-top:0;margin-bottom:5px;font-size:20px;color:#EC008C;">{{ $row->name }}</p>
 					<p style="margin-top:0;margin-bottom:5px;font-size:14px;">Quantity: {{ $row->qty }}</p>
 				</td>
 			</tr>
@@ -38,6 +33,18 @@
 	</td>
 </tr>
 @endforeach
+
+<tr>
+	<td>
+        <img src="{{ asset('images/stand-temp.jpg')}}" alt="LSi at SMMEX" />
+	</td>
+</tr>
+
+<tr>
+	<td>
+        <p style="font-size:14px; margin-top:20px; margin-bottom:20px;">Thank you for visiting us. Visit <a href="http://lsi.co.uk" style="color:#EC008C;">LSi</a> for all your promotional needs.</p>
+	</td>
+</tr>
 
 <tr>
 	<td>
