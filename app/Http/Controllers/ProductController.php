@@ -14,13 +14,19 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $shirtProducts = Product::where('sku', 'like', '%%FS%%')->orderBy('name')->get();
         $multiProducts = Product::whereNotNull('gatewaymulti')->get();
-        //$products = Product::whereNull('gateway')->get();
         
         return view('product.index', [
-           'shirtProducts' => $shirtProducts,
            'multiProducts' => $multiProducts,
+        ]);
+    }
+    
+    public function getShirts()
+    {
+        $shirtProducts = Product::where('sku', 'like', '%%FS%%')->orderBy('name')->get();
+        
+        return view('product.shirts', [
+           'shirtProducts' => $shirtProducts,
         ]);
     }
 

@@ -7,10 +7,10 @@
     
     <hr>
     
-    <h2>Presentation Box</h2>
+    <h2>Football Shirts</h2>
     
     <div class="row">
-        @foreach($multiProducts as $product)
+        @foreach($shirtProducts as $product)
         <div class="col-sm-3 text-center">
             {{--<a href="{{ action('ProductController@show', $product->id)}}">--}}
             @if($product->gatewaymulti)

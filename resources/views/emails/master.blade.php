@@ -53,7 +53,7 @@
 				   From there, you can overwrite your styles inline if needed.  */
 	   
 			   a, a:link {
-				   color: #DD5A12;
+				   color: #EC008C;
 				   text-decoration: underline;
 				   }  /* This is the embedded CSS link color for Gmail.  This will overwrite Outlook.com and Yahoo Beta's 
 				   embedded link colors and make it consistent with Gmail.  You must overwrite this color inline. */		   
