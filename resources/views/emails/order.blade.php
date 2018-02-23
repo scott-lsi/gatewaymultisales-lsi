@@ -50,6 +50,9 @@
 	<td>
         <p style="font-size:11px; margin-top:30px; margin-bottom:20px;">
             &copy; <a href="http://lsi.co.uk">LSi</a> 2018 @if(date('Y') !== '2018') &ndash; {{ date('Y') }} @endif
+            <br>Braemar House, Snelsins Road, Cleckheaton, West Yorkshire, BD19 3UE
+            <br>Tel: (01274) 854996
+            <br>Web: <a href="http://lsi.co.uk">LSi.co.uk</a>
         </p>
 	</td>
 </tr>
