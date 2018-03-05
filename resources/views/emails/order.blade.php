@@ -36,7 +36,7 @@
 
 <tr>
 	<td>
-        <img src="{{ asset('images/emails/stand-temp.jpg')}}" alt="LSi at SMMEX" />
+        <img src="{{ asset('images/emails/stand.jpg')}}" alt="LSi at SMMEX" />
 	</td>
 </tr>
 
