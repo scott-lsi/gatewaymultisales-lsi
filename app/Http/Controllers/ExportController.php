@@ -57,7 +57,7 @@ class ExportController extends Controller
             }
         }
         
-        $file = \Excel::create('JagerLabels_' . $monthago_formatted . '-' . $today_formatted, function($excel) use($per_order, $per_product){
+        $file = \Excel::create('SMMEX_' . $monthago_formatted . '-' . $today_formatted, function($excel) use($per_order, $per_product){
             $excel->sheet('per_product', function($sheet) use($per_product){
                $sheet->fromArray($per_product);
             });
@@ -73,7 +73,7 @@ class ExportController extends Controller
         
         \Mail::send('emails.report', $view_data, function($message) use($email_data, $file) {
             $message->to($email_data['email'])
-                    ->subject('Jägermeister labels Report')
+                    ->subject('SMMEX Order Report')
                     ->attach($file['full']);
         });
         
