@@ -16,7 +16,7 @@ Auth::routes();
 
 Route::get('/', 'PageController@home');
 Route::post('/accesscode', 'PageController@postAccessCode');
-//Route::get('/export', 'ExportController@exportOrders');
+Route::get('/export', 'ExportController@exportOrders');
 //Route::get('/test', 'PageController@test');
 
 Route::group(['middleware' => ['accesscode']], function(){
