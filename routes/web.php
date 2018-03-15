@@ -24,7 +24,7 @@ Route::group(['middleware' => ['accesscode']], function(){
     Route::get('/shirts', 'ProductController@getShirts');
     Route::resource('product', 'ProductController');
     Route::get('product/personaliser/{id}/{gatewaymulti?}', 'ProductController@personaliser');
-    Route::get('product/personaliser/epa/{id}', 'ProductController@getExternalPricingAPI');
+    Route::get('productepa/{id?}', 'ProductController@getExternalPricingAPI');
 
     Route::get('basket', 'CartController@index');
     Route::post('basket/add/{gatewaymulti?}', 'CartController@add');

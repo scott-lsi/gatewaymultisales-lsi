@@ -70,23 +70,23 @@
                 <div class="panel-body">
                     {!! Form::open(['action' => 'CartController@postToPrint']) !!}
                         <div class="form-group">
-                            <label for="name">Recipient Name *</label>
+                            <label for="name">Your Name *</label>
                             {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) !!}
                         </div>
                     
                         <div class="form-group">
-                            <label for="name">Recipient Company *</label>
-                            {!! Form::text('company', null, ['class' => 'form-control', 'id' => 'company']) !!}
+                            <label for="name">Your Email Address *</label>
+                            {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Recipient Email Address *</label>
-                            {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
+                            <label for="email">Sales Order Number *</label>
+                            {!! Form::text('sonumber', null, ['class' => 'form-control', 'id' => 'sonumber']) !!}
                         </div>
 
                         <hr>
 
-                        {!! Form::submit('Place Order', ['class' => 'btn btn-block btn-primary']) !!}
+                        {!! Form::submit('Send To Print', ['class' => 'btn btn-block btn-primary']) !!}
                     {!! Form::close() !!}
                 </div>
             </div>

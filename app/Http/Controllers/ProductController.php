@@ -14,19 +14,10 @@ class ProductController extends Controller
      */
     public function index()
     {
-        $multiProducts = Product::whereNotNull('gatewaymulti')->get();
+        $products = Product::all();
         
         return view('product.index', [
-           'multiProducts' => $multiProducts,
-        ]);
-    }
-    
-    public function getShirts()
-    {
-        $shirtProducts = Product::where('sku', 'like', '%%FS%%')->orderBy('name')->get();
-        
-        return view('product.shirts', [
-           'shirtProducts' => $shirtProducts,
+           'products' => $products,
         ]);
     }
 
@@ -103,21 +94,13 @@ class ProductController extends Controller
     public function personaliser($id, $gatewaymultiId = null){
         $product = Product::find($id);
         
-        /* acp2 not applying stroke
-        if(\App::environment('local')) { $iframeUrl = 'https://app.gateway3d.com/acp/app/?l=acp2'; }
-        else { $iframeUrl = 'https://my.gateway3d.com/acp/app/?l=acp2'; }
-        $iframeUrl .= '&c=' . env('GATEWAY_CONFIG');
-        $iframeUrl .= '#p=' . $product->gateway;
-        $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
-        $iframeUrl .= '&r=multi';
-        $iframeUrl .= '&ep3dUrl=' . action('CartController@add', [$gatewaymultiId]);*/
-        
         if(\App::environment('local')) { $iframeUrl = 'https://app.gateway3d.com/acp/app/?l=acp3'; }
         else { $iframeUrl = 'https://my.gateway3d.com/acp/app/?l=acp3'; }
         $iframeUrl .= '&c=' . env('GATEWAY_CONFIG');
         $iframeUrl .= '#p=' . $product->gateway;
         $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
         $iframeUrl .= '&r=2d-canvas';
+		$iframeUrl .= '&epa=' . action('ProductController@getExternalPricingAPI', $product->id);
         $iframeUrl .= '&ep3dUrl=' . action('CartController@add', [$gatewaymultiId]);
         
         return view('product.personaliser', [
@@ -133,7 +116,6 @@ class ProductController extends Controller
 		$product = Product::find($id);
 		
 		$epaArray = [
-			'price' => $product->price,
 			'name' => $product->name,
 			'description' => $product->description,
 		];

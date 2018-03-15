@@ -14,12 +14,12 @@ class OrderTableChanges extends Migration
     public function up()
     {
         // https://github.com/laravel/framework/issues/1186#issuecomment-248853309 (changing enum to json)
-        Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('json', 'string');
+        /*Schema::getConnection()->getDoctrineSchemaManager()->getDatabasePlatform()->registerDoctrineTypeMapping('json', 'string');
         
         Schema::table('orders', function (Blueprint $table) {
             $table->date('deliverydate')->nullable()->change();
             $table->string('notes')->after('deliverydate')->nullable();
-        });
+        });*/
     }
 
     /**

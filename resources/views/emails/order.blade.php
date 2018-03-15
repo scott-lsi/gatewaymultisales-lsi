@@ -7,7 +7,7 @@
 <tr>
 	<td>
         <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Hi {{ $name }},</p>
-        <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Thank you for visiting us at SMMEX. Your personalised product will be despatched to you within the next couple of days.</p>
+        <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Your LSi print creator order has been created.</p>
 	</td>
 </tr>
 
@@ -33,18 +33,6 @@
 	</td>
 </tr>
 @endforeach
-
-<tr>
-	<td>
-        <img src="{{ asset('images/emails/stand.jpg')}}" alt="LSi at SMMEX" />
-	</td>
-</tr>
-
-<tr>
-	<td>
-        <p style="font-size:14px; margin-top:20px; margin-bottom:20px;">Thank you for visiting us. Visit <a href="http://lsi.co.uk" style="color:#EC008C;">LSi</a> for all your promotional needs.</p>
-	</td>
-</tr>
 
 <tr>
 	<td>

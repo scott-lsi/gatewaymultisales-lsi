@@ -14,7 +14,7 @@ class AddCompanyToOrders extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->string('company');
+            //$table->string('company');
         });
     }
 

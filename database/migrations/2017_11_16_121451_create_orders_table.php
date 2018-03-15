@@ -17,14 +17,8 @@ class CreateOrdersTable extends Migration
             $table->increments('id');
             $table->string('name');
             $table->string('email');
-            $table->string('add1');
-            $table->string('add2')->nullable();
-            $table->string('add3')->nullable();
-            $table->string('add4')->nullable();
-            $table->string('add5')->nullable();
-            $table->string('postcode');
-            $table->string('country');
-            $table->string('countrycode');
+            $table->string('sonumber');
+            $table->json('basket');
             $table->json('g3d');
             $table->timestamps();
         });

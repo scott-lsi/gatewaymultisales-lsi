@@ -166,14 +166,11 @@
 				<td>
 					<table cellpadding="10" cellspacing="0" border="0" width="600" align="center">
 						<tr>
-							<td width="131" align="left">
-								<a href="http://lsi.co.uk"><img src="{{ asset('images/emails/lsi-logo.png') }}" alt="{{ env('APP_NAME') }}" style="display:block" border="0" /></a>
-							</td>
-							<td width="338" align="center">
-								<p style="margin-top:0;font-size:18px;color:#EC008C;text-align:center;">@yield('title')</p>
-							</td>
-							<td width="131" align="right">
+							<td width="151" align="left">
 								<a href="http://lsi.co.uk"><img src="{{ asset('images/emails/box-logo.png') }}" alt="{{ env('APP_NAME') }}" style="display:block" border="0" /></a>
+							</td>
+							<td width="449" align="right">
+								<p style="margin-top:0;font-size:18px;color:#EC008C;text-align:right;">@yield('title')</p>
 							</td>
 						</tr>
 					</table>

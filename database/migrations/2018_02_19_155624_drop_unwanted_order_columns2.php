@@ -14,8 +14,8 @@ class DropUnwantedOrderColumns2 extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('add5');
-            $table->dropColumn('notes');
+            /*$table->dropColumn('add5');
+            $table->dropColumn('notes');*/
         });
     }
 

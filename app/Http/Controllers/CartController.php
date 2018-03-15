@@ -98,49 +98,27 @@ class CartController extends Controller
     }
     
 	public function postToPrint(Request $request){
-        $validatorRules = [
-            'name' =>               'required',
-            'company' =>            'required',
-            'email' =>              'required|email',
-        ];
-        
-        $validatorMessages = [
-            'name.required' => 'Please ensure you have entered a recipient name',
-            'company.required' => 'Please ensure you have entered a company name',
-            'email.required' => 'Please enter your email address',
-            'email.email' => 'Please enter a valid email address',
-        ];
-        
-        $validator = \Validator::make($request->all(), $validatorRules, $validatorMessages);
-        if($validator->fails()){
-            return redirect()->back()->withErrors($validator)->withInput();
-        }
-        
-        // make an orderid
-        $orderid = env('ORDERID_PREFIX') . '-' . str_random(5);
-        
         // prepare the artwork
-        $g3d = $this->gatewayPrepare($request, $orderid); 
+        $g3d = $this->gatewayPrepare($request, $request->input('sonumber')); 
         
         // create a new order for the db        
         $order = new Order;
-        $order->orderid = $orderid;
         $order->name = $request->input('name');
-        $order->company = $request->input('company');
+        $order->sonumber = $request->input('sonumber');
         $order->email = $request->input('email');
         $order->basket = json_encode(Cart::content());
         $order->g3d = $g3d;
         
         // email
         $view_data = [
-            'orderid' => $orderid,
-            'name' => $request->input('name'),
-            'company' => $request->input('company'),
+            'name' => $request->name,
+            'email' => $request->email,
+            'sonumber' => $request->sonumber,
             'basket' => \Cart::Content(),
         ];
         $email_data = [
-            'name' => $request->input('name'),
-            'email' => $request->input('email'),
+            'name' => $request->name,
+            'email' => $request->email,
         ];
         
         // save it all and send things
@@ -174,16 +152,16 @@ class CartController extends Controller
         return json_decode($json);
     }
     
-    private function gatewayPrepare(Request $request, $orderid){
+    private function gatewayPrepare(Request $request, $sonumber){
         $gatewayArray = [
-            'external_ref' => $orderid,
+            'external_ref' => $request->input('sonumber'),
             'company_ref_id' => env('GATEWAY_COMPANY'),
             'sale_datetime' => date('Y-m-d H:i:s'),
             
             'customer_name' => $request->input('name'),
             'customer_email' => $request->input('email'),
 			
-			'shipping_address_1' =>	$request->input('company'),
+			'shipping_address_1' =>	'',
 			'shipping_address_2' =>	'',
 			'shipping_address_3' =>	'',
 			'shipping_address_4' =>	'',
@@ -217,7 +195,7 @@ class CartController extends Controller
                 
                 $productArray = [
                     'sku' => $product->sku,
-                    'external_ref' => $orderid . '-' . str_pad($i, 2, '0', STR_PAD_LEFT),
+                    'external_ref' => $sonumber,
                     'description' => $row->name,
                     'quantity' => $row->qty,
                     'type' => 2, // 2 = Print Job (http://developers.gateway3d.com/Print-iT_Integration#Item_Type_Codes)
@@ -238,7 +216,7 @@ class CartController extends Controller
     }
     
     private function gatewaySend($order){
-        $gatewayUrl = 'https://my.gateway3d.com/acp/api/sl/2.1/order/?k=' . env('GATEWAY_API_KEY');
+        $gatewayUrl = env('GATEWAY_API_URL') . env('GATEWAY_API_KEY');
         
 		$curl = curl_init($gatewayUrl);
 		curl_setopt($curl, CURLOPT_HEADER, false);

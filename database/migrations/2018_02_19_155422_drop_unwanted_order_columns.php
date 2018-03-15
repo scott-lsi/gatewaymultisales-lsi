@@ -14,7 +14,7 @@ class DropUnwantedOrderColumns extends Migration
     public function up()
     {
         Schema::table('orders', function (Blueprint $table) {
-            $table->dropColumn('add1');
+            /*$table->dropColumn('add1');
             $table->dropColumn('add2');
             $table->dropColumn('add3');
             $table->dropColumn('add4');
@@ -22,7 +22,7 @@ class DropUnwantedOrderColumns extends Migration
             $table->dropColumn('country');
             $table->dropColumn('countrycode');
             $table->dropColumn('deliverydate');
-            $table->dropColumn('recipient');
+            $table->dropColumn('recipient');*/
         });
     }
 
