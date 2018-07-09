@@ -167,7 +167,7 @@
 					<table cellpadding="10" cellspacing="0" border="0" width="600" align="center">
 						<tr>
 							<td width="151" align="left">
-								<a href="http://lsi.co.uk"><img src="{{ asset('images/emails/box-logo.png') }}" alt="{{ env('APP_NAME') }}" style="display:block" border="0" /></a>
+								<a href="http://lsi.co.uk"><img src="{{ asset('images/emails/lsi-logo.png') }}" alt="{{ env('APP_NAME') }}" style="display:block" border="0" /></a>
 							</td>
 							<td width="449" align="right">
 								<p style="margin-top:0;font-size:18px;color:#EC008C;text-align:right;">@yield('title')</p>
