@@ -3,12 +3,12 @@
 @section('content')
 
 <div class="container">
-    <h1>Products</h1>
+    <h1>{{ $title }}</h1>
     
     <hr>
     
     <div class="row">
-    	<?php $i = 1; ?>
+        <?php $i = 1; ?>
         @foreach($products as $product)
 
         <div class="col-sm-3 text-center">
@@ -30,7 +30,7 @@
             </a>
         </div>
 
-		<?php if($i % 4 === 0){ echo '<div class="clearfix"></div>'; } ?>
+        <?php if($i % 4 === 0){ echo '<div class="clearfix"></div>'; } ?>
         <?php $i++; ?>
         @endforeach
         

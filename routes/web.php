@@ -21,7 +21,7 @@ Route::get('/export', 'ExportController@exportOrders');
 
 Route::group(['middleware' => ['accesscode']], function(){
     Route::get('/products', 'ProductController@index');
-    Route::get('/shirts', 'ProductController@getShirts');
+    Route::get('/products/{type}', 'ProductController@getProductsByType');
     Route::resource('product', 'ProductController');
     Route::get('product/personaliser/{id}/{gatewaymulti?}', 'ProductController@personaliser');
     Route::get('productepa/{id?}', 'ProductController@getExternalPricingAPI');

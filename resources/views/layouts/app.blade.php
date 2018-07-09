@@ -41,13 +41,55 @@
 
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
-                    <ul class="nav navbar-nav">
+                    <ul class="nav navbar-nav" >
                         @if(session('accesscode'))
                         <li><a href="{{ action('ProductController@index') }}">Products</a></li>
-                        <li><a href="{{ action('CartController@index') }}">Basket</a></li>
-                        <li><a href="{{ action('PageController@logout') }}">Log Out</a></li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Powerbanks<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{ action('ProductController@getProductsByType', 'Powerbanks') }}">All Powerbanks</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'pb101Powerbanks') }}">PB101 - Cuboid Metal 2000mAh</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'pb116Powerbanks') }}">PB116 - Credit Card 2500mAh</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'pb119Powerbanks') }}">PB119 - Flat 4000mAh</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'pb119cPowerbanks') }}">PB119c - Flat 8000mAh</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'shirtPowerbanks') }}">Football Shirt</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notebooks<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{ action('ProductController@getProductsByType', 'Notebooks') }}">All Notebooks</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'hollyEdgeA5Notebooks') }}">A5 Holly Edge Book</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'hollyA5Notebooks') }}">A5 Holly Book</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'hollyA6Notebooks') }}">A6 Holly Book</a></li>
+                          </ul>
+                        </li>
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pens<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{ action('ProductController@getProductsByType', 'Pens') }}">All Pens</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'curvyBallpen') }}">Curvy Ballpen</a></li>
+                          </ul>
+                        </li>
+                        
+                        <li class="dropdown">
+                          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Boxes<span class="caret"></span></a>
+                          <ul class="dropdown-menu">
+                            <li><a href="{{ action('ProductController@getProductsByType', 'Boxes') }}">All Boxes</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'midiBoxes') }}">Midi Box</a></li>
+                          </ul>
+                        </li>
                         @endif
                     </ul>
+                    <ul class="nav navbar-nav navbar-right">
+                            <li><a href="{{ action('CartController@index') }}">Basket</a></li>
+                            <li><a href="{{ action('PageController@logout') }}">Log Out</a></li>
+                        </ul>
                 </div>
             </div>
         </nav>

@@ -21,6 +21,28 @@ class ProductController extends Controller
         ]);
     }
 
+
+    
+    public function getProductsByType($type)
+    {
+        $products = Product::where('category', 'like', '%%' . $type . '%%')->orderBy('name')->get();
+        $title = $this->camelToNice($type);
+
+        return view('product.productcat', [
+           'products' => $products,
+           'title' => $title,
+        ]);
+    }
+
+    /*public function getProductsByCat($cat)
+    {
+        $nbProducts = Product::where('category', 'like', '%%' . $cat . '%%')->orderBy('name')->get();
+        
+        return view('product.notebooks', [
+           'nbProducts' => $nbProducts,
+        ]);
+    }*/
+
     /**
      * Show the form for creating a new resource.
      *
@@ -125,4 +147,10 @@ class ProductController extends Controller
 		echo "{$callback}({$epaJson})";
 		exit;
 	}
+
+    private function camelToNice($str) {
+        $output = preg_replace('/(?<=\\w)(?=[A-Z])/', " $1", $str);
+        $output = trim($output);
+        return ucwords($output);
+    }
 }
