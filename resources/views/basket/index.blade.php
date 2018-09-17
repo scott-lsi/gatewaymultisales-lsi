@@ -80,9 +80,21 @@
                         </div>
 
                         <div class="form-group">
-                            <label for="email">Sales Order Number *</label>
+                            <label for="email">Customer Number *</label>
                             {!! Form::text('sonumber', null, ['class' => 'form-control', 'id' => 'sonumber']) !!}
                         </div>
+
+                        <div class="form-group">
+                            <label for="email">Customer Name *</label>
+                            {!! Form::text('sonumber', null, ['class' => 'form-control', 'id' => 'sonumber']) !!}
+                        </div>
+
+                        <div class="form-group">
+                            <label for="email">More Info</label>
+                            {!! Form::text('sonumber', null, ['class' => 'form-control', 'id' => 'sonumber']) !!}
+                        </div>
+
+
 
                         <hr>
 
