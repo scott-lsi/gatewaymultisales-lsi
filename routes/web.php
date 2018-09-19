@@ -11,13 +11,18 @@
 |
 */
 
-//Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index')->name('home');
 Auth::routes();
 
-Route::get('/', 'PageController@home');
+// Route::get('/', 'PageController@home');
 Route::post('/accesscode', 'PageController@postAccessCode');
 Route::get('/export', 'ExportController@exportOrders');
 //Route::get('/test', 'PageController@test');
+
+Route::get('profile', function() {
+    //Only Auth Users May Enter...
+})->middleware('auth');
+
 
 Route::group(['middleware' => ['accesscode']], function(){
     Route::get('/products', 'ProductController@index');

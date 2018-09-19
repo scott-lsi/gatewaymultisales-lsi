@@ -72,6 +72,7 @@
                         <div class="form-group">
                             <label for="name">Your Name *</label>
                             {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) !!}
+                            {!! Form::model($user, ['route' => ['user.update', $user->name]]) !!}
                         </div>
                     
                         <div class="form-group">
@@ -81,17 +82,17 @@
 
                         <div class="form-group">
                             <label for="email">Customer Number *</label>
-                            {!! Form::text('sonumber', null, ['class' => 'form-control', 'id' => 'sonumber']) !!}
+                            {!! Form::text('custno', null, ['class' => 'form-control', 'id' => 'custno']) !!}
                         </div>
 
                         <div class="form-group">
                             <label for="email">Customer Name *</label>
-                            {!! Form::text('sonumber', null, ['class' => 'form-control', 'id' => 'sonumber']) !!}
+                            {!! Form::text('custname', null, ['class' => 'form-control', 'id' => 'custname']) !!}
                         </div>
 
                         <div class="form-group">
                             <label for="email">More Info</label>
-                            {!! Form::text('sonumber', null, ['class' => 'form-control', 'id' => 'sonumber']) !!}
+                            {!! Form::text('moreinfo', null, ['class' => 'form-control', 'id' => 'moreinfo']) !!}
                         </div>
 
 
