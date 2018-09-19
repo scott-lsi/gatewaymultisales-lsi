@@ -8,7 +8,7 @@
 <body><
 
 {{ Form::open(array('url' => 'login')) }}
-<h1>Login</h1>
+<h1>Login erreeee kid</h1>
 
 <!-- if there are login errors, show them here -->
 <p>
