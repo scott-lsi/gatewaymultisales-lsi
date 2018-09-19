@@ -7,7 +7,7 @@
     
     <hr>
     
-    {{ Form::open(array('url' => '/')) }}
+    {{ Form::open() }}
     <h1>Login</h1>
 
     <!-- if there are login errors, show them here -->
