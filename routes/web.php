@@ -11,11 +11,11 @@
 |
 */
 
-Route::get('/', 'HomeController@index')->name('home');
+Route::get('/', 'HomeController@index');
 Auth::routes();
 
 // Route::get('/', 'PageController@home');
-Route::post('/accesscode', 'PageController@postAccessCode');
+// Route::post('/accesscode', 'PageController@postAccessCode');
 Route::get('/export', 'ExportController@exportOrders');
 //Route::get('/test', 'PageController@test');
 
