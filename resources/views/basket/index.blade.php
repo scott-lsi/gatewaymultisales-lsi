@@ -81,7 +81,7 @@
 
                         <div class="form-group">
                             <label for="email">Customer Number *</label>
-                            {!! Form::text('custno', null, ['class' => 'form-control', 'id' => 'custno']) !!}
+                            {!! Form::text('custnumber', null, ['class' => 'form-control', 'id' => 'custnumber']) !!}
                         </div>
 
                         <div class="form-group">

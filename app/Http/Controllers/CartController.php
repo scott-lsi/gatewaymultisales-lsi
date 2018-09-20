@@ -99,12 +99,14 @@ class CartController extends Controller
     
 	public function postToPrint(Request $request){
         // prepare the artwork
-        $g3d = $this->gatewayPrepare($request, $request->input('sonumber')); 
+        $g3d = $this->gatewayPrepare($request, $request->input('custnumber')); 
         
         // create a new order for the db        
         $order = new Order;
         $order->name = $request->input('name');
-        $order->sonumber = $request->input('sonumber');
+        $order->custnumber = $request->input('custnumber');
+        $order->custname = $request->input('custname');
+        $order->moreinfo = $request->input('moreinfo');
         $order->email = $request->input('email');
         $order->basket = json_encode(Cart::content());
         $order->g3d = $g3d;
@@ -113,7 +115,9 @@ class CartController extends Controller
         $view_data = [
             'name' => $request->name,
             'email' => $request->email,
-            'sonumber' => $request->sonumber,
+            'custnumber' => $request->custnumber,
+            'custname' => $request->custname,
+            'moreinfo' => $request->moreinfo,
             'basket' => \Cart::Content(),
         ];
         $email_data = [
@@ -152,9 +156,9 @@ class CartController extends Controller
         return json_decode($json);
     }
     
-    private function gatewayPrepare(Request $request, $sonumber){
+    private function gatewayPrepare(Request $request, $custnumber){
         $gatewayArray = [
-            'external_ref' => $request->input('sonumber'),
+            'external_ref' => $request->input('custnumber'),
             'company_ref_id' => env('GATEWAY_COMPANY'),
             'sale_datetime' => date('Y-m-d H:i:s'),
             
@@ -195,7 +199,7 @@ class CartController extends Controller
                 
                 $productArray = [
                     'sku' => $product->sku,
-                    'external_ref' => $sonumber,
+                    'external_ref' => $custnumber,
                     'description' => $row->name,
                     'quantity' => $row->qty,
                     'type' => 2, // 2 = Print Job (http://developers.gateway3d.com/Print-iT_Integration#Item_Type_Codes)
