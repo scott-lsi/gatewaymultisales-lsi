@@ -28,7 +28,7 @@
                     </button>
 
                     <!-- Branding Image -->
-                    @if(session('accesscode'))
+                    @if(\Auth::check())
                     <a class="navbar-brand" href="{{ action('ProductController@index') }}">
                         {{ config('app.name', 'Laravel') }}
                     </a>
@@ -42,7 +42,7 @@
                 <div class="collapse navbar-collapse" id="app-navbar-collapse">
                     <!-- Left Side Of Navbar -->
                     <ul class="nav navbar-nav" >
-                        @if(session('accesscode'))
+                        @if(\Auth::check())
                         <li><a href="{{ action('ProductController@index') }}">Products</a></li>
                         <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Powerbanks<span class="caret"></span></a>
