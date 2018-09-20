@@ -71,13 +71,12 @@
                     {!! Form::open(['action' => 'CartController@postToPrint']) !!}
                         <div class="form-group">
                             <label for="name">Your Name *</label>
-                            {!! Form::text('name', null, ['class' => 'form-control', 'id' => 'name']) !!}
-                            {!! Form::model($user, ['route' => ['user.update', $user->name]]) !!}
+                            {!! Form::text('name', auth()->user()->name, ['class' => 'form-control', 'id' => 'name']) !!}
                         </div>
                     
                         <div class="form-group">
                             <label for="name">Your Email Address *</label>
-                            {!! Form::text('email', null, ['class' => 'form-control', 'id' => 'email']) !!}
+                            {!! Form::text('email', auth()->user()->email, ['class' => 'form-control', 'id' => 'email']) !!}
                         </div>
 
                         <div class="form-group">
@@ -92,7 +91,7 @@
 
                         <div class="form-group">
                             <label for="email">More Info</label>
-                            {!! Form::text('moreinfo', null, ['class' => 'form-control', 'id' => 'moreinfo']) !!}
+                            {!! Form::textarea('moreinfo', null, ['class' => 'form-control', 'id' => 'moreinfo']) !!}
                         </div>
 
 

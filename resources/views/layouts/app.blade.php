@@ -87,8 +87,13 @@
                         @endif
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
+                            @if(!\Auth::check())
+                            <li><a href="{{ route('login') }}">Login</a></li>
+                            <li><a href="{{ route('register') }}">Register</a></li>
+                            @else
                             <li><a href="{{ action('CartController@index') }}">Basket</a></li>
-                            <li><a href="{{ action('PageController@logout') }}">Log Out</a></li>
+                            <li><a href="{{ action('HomeController@logout') }}">Log Out</a></li>
+                            @endif
                         </ul>
                 </div>
             </div>

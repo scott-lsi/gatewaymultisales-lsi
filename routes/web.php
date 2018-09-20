@@ -19,26 +19,19 @@ Auth::routes();
 Route::get('/export', 'ExportController@exportOrders');
 //Route::get('/test', 'PageController@test');
 
-Route::get('profile', function() {
-    //Only Auth Users May Enter...
-})->middleware('auth');
+Route::get('/products', 'ProductController@index');
+Route::get('/products/{type}', 'ProductController@getProductsByType');
+Route::resource('product', 'ProductController');
+Route::get('product/personaliser/{id}/{gatewaymulti?}', 'ProductController@personaliser');
+Route::get('productepa/{id?}', 'ProductController@getExternalPricingAPI');
 
+Route::get('basket', 'CartController@index');
+Route::post('basket/add/{gatewaymulti?}', 'CartController@add');
+Route::get('basket/destroy', 'CartController@destroy');
+Route::get('basket/redir/{id?}/{gatewaymultiId?}', 'CartController@gatewayRedir');
+Route::get('basket/remove-item/{rowId}', 'CartController@getRemoveItem');
+Route::post('basket/update-qty/{rowId}', 'CartController@postUpdateQty');
+Route::post('basket/post-to-print', 'CartController@postToPrint');
+Route::get('complete', 'CartController@getComplete');
 
-Route::group(['middleware' => ['accesscode']], function(){
-    Route::get('/products', 'ProductController@index');
-    Route::get('/products/{type}', 'ProductController@getProductsByType');
-    Route::resource('product', 'ProductController');
-    Route::get('product/personaliser/{id}/{gatewaymulti?}', 'ProductController@personaliser');
-    Route::get('productepa/{id?}', 'ProductController@getExternalPricingAPI');
-
-    Route::get('basket', 'CartController@index');
-    Route::post('basket/add/{gatewaymulti?}', 'CartController@add');
-    Route::get('basket/destroy', 'CartController@destroy');
-    Route::get('basket/redir/{id?}/{gatewaymultiId?}', 'CartController@gatewayRedir');
-    Route::get('basket/remove-item/{rowId}', 'CartController@getRemoveItem');
-    Route::post('basket/update-qty/{rowId}', 'CartController@postUpdateQty');
-    Route::post('basket/post-to-print', 'CartController@postToPrint');
-    Route::get('complete', 'CartController@getComplete');
-    
-    Route::get('/logout', 'PageController@logout');
-});
+Route::get('/logout', 'HomeController@logout');
