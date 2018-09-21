@@ -8,6 +8,9 @@
 	<td>
         <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Hi {{ $name }},</p>
         <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Your LSi print creator order has been created.</p>
+        <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Customer Name: {{ $custname }},</p>
+        <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">Customer Number: {{ $custnumber }},</p>
+        <p style="font-size:14px; margin-top:30px; margin-bottom:20px;">More Info: {{ $moreinfo }},</p>
 	</td>
 </tr>
 
