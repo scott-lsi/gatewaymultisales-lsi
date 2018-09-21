@@ -123,9 +123,6 @@ class CartController extends Controller
         $email_data = [
             'name' => $request->name,
             'email' => $request->email,
-            'custnumber' => $request->custnumber,
-            'custname' => $request->custname,
-            'moreinfo' => $request->moreinfo,
         ];
         
         // save it all and send things
