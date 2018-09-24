@@ -90,6 +90,11 @@
                         </div>
 
                         <div class="form-group">
+                            <label for="email">Preferred Delivery Date</label>
+                            {!! Form::date('deldate', \Carbon\Carbon::now()->addWeekdays(3), ['class' => 'form-control', 'id' => 'deldate']) !!}
+                        </div>
+
+                        <div class="form-group">
                             <label for="email">More Info</label>
                             {!! Form::textarea('moreinfo', null, ['class' => 'form-control', 'id' => 'moreinfo']) !!}
                         </div>

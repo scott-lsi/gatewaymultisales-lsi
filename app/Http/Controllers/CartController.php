@@ -118,6 +118,7 @@ class CartController extends Controller
             'custnumber' => $request->custnumber,
             'custname' => $request->custname,
             'moreinfo' => $request->moreinfo,
+            'deldate' => $request->deldate,
             'basket' => \Cart::Content(),
         ];
         $email_data = [
