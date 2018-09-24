@@ -65,6 +65,9 @@
                             <li><a href="{{ action('ProductController@getProductsByType', 'hollyEdgeA5Notebooks') }}">A5 Holly Edge Book</a></li>
                             <li><a href="{{ action('ProductController@getProductsByType', 'hollyA5Notebooks') }}">A5 Holly Book</a></li>
                             <li><a href="{{ action('ProductController@getProductsByType', 'hollyA6Notebooks') }}">A6 Holly Book</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'alfieA5Notebooks') }}">A5 Alfie Book</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'alfieA6Notebooks') }}">A6 Alfie Book</a></li>
                           </ul>
                         </li>
                         <li class="dropdown">
@@ -73,6 +76,7 @@
                             <li><a href="{{ action('ProductController@getProductsByType', 'Pens') }}">All Pens</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ action('ProductController@getProductsByType', 'curvyBallpen') }}">Curvy Ballpen</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'contourBallpen') }}">Contour Ballpen</a></li>
                           </ul>
                         </li>
                         
