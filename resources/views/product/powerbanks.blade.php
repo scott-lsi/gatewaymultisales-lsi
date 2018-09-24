@@ -13,11 +13,6 @@
 
         <div class="col-sm-3 text-center">
             <a href="{{ action('ProductController@show', $product->id)}}">
-            @if($product->gatewaymulti)
-            <a href="{{ action('ProductController@personaliser', [json_decode($product->gatewaymulti, true)[1], $product->id]) }}">
-            @else($product->gateway)
-            <a href="{{ action('ProductController@personaliser', $product->id) }}">
-            @endif
                 <?php
                     if(strncmp($product->image, 'http', 4) === 0){
                         $imageurl = $product->image;
