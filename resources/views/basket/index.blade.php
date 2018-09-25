@@ -43,7 +43,7 @@
                             </p>
                             @endif
 
-                            <p>{{ $product->price }}</p>
+                            <p>{{ $row->price }}</p>
                             
                             {!! Form::open(['action' => ['CartController@postUpdateQty', $row->rowId]]) !!}
                             <div class="row">
