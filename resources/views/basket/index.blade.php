@@ -42,6 +42,8 @@
                             @endforeach
                             </p>
                             @endif
+
+                            <p>{{ $product->price }}</p>
                             
                             {!! Form::open(['action' => ['CartController@postUpdateQty', $row->rowId]]) !!}
                             <div class="row">
