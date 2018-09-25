@@ -13,11 +13,10 @@
 
 Route::get('/', 'HomeController@index');
 Auth::routes();
-
 // Route::get('/', 'PageController@home');
 // Route::post('/accesscode', 'PageController@postAccessCode');
-Route::get('/export', 'ExportController@exportOrders');
 //Route::get('/test', 'PageController@test');
+Route::get('/export', 'ExportController@exportOrders');
 
 Route::get('/products', 'ProductController@index');
 Route::get('/products/{type}', 'ProductController@getProductsByType');

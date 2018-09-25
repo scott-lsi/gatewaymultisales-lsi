@@ -26,6 +26,8 @@
 				<td>
 					<p style="margin-top:0;margin-bottom:5px;font-size:20px;color:#EC008C;">{{ $row->name }}</p>
 					<p style="margin-top:0;margin-bottom:5px;font-size:14px;">Quantity: {{ $row->qty }}</p>
+					<p style="margin-top:0;margin-bottom:5px;font-size:14px;">Price (each): {{ $row->price }}</p>
+					<p style="margin-top:0;margin-bottom:5px;font-size:14px;">Subtotal: {{ $row->price * $row->qty }}</p>
 				</td>
 			</tr>
 		</table>
