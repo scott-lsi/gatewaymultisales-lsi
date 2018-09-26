@@ -16,6 +16,7 @@ Auth::routes();
 // Route::get('/', 'PageController@home');
 // Route::post('/accesscode', 'PageController@postAccessCode');
 //Route::get('/test', 'PageController@test');
+Route::middleware(['auth'])->group(function () {
 Route::get('/export', 'ExportController@exportOrders');
 
 Route::get('/products', 'ProductController@index');
@@ -34,3 +35,5 @@ Route::post('basket/post-to-print', 'CartController@postToPrint');
 Route::get('complete', 'CartController@getComplete');
 
 Route::get('/logout', 'HomeController@logout');
+
+});
