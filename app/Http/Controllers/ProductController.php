@@ -73,9 +73,22 @@ class ProductController extends Controller
     public function show($id)
     {
         $product = Product::find($id);
+
+        $mobileUrl = 'https://app.gateway3d.com/acp/app/';
+        $mobileUrl .= '?';
+        $mobileUrl .= 'l=mobile';
+        $mobileUrl .= '&';
+        $mobileUrl .= 'c=7dzqyj5h26zljz4';
+        $mobileUrl .= '#';
+        $mobileUrl .= 'p=' . $product->gateway;
+        $mobileUrl .= '&guid=' . env('GATEWAY_COMPANY');
+        $mobileUrl .= '&r=multi';
+        $mobileUrl .= '&epa=' . action('ProductController@getExternalPricingAPI', [$product->id]);
+        $mobileUrl .= '&ep3dUrl=' . action('CartController@add');
         
         return view('product.show', [
            'product' => $product,
+           'mobileUrl' => $mobileUrl,
         ]);
     }
 
@@ -125,6 +138,7 @@ class ProductController extends Controller
 		$iframeUrl .= '&epa=' . action('ProductController@getExternalPricingAPI', $product->id);
         $iframeUrl .= '&ep3dUrl=' . action('CartController@add', [$gatewaymultiId]);
         
+
         return view('product.personaliser', [
             'product' => $product,
             'iframeUrl' => $iframeUrl,
