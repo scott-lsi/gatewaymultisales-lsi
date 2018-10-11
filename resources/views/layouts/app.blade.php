@@ -86,6 +86,7 @@
                             <li><a href="{{ action('ProductController@getProductsByType', 'Boxes') }}">All Boxes</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ action('ProductController@getProductsByType', 'midiBoxes') }}">Midi Box</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'midiBoxWithItems') }}">Midi Box With Items</a></li>
                           </ul>
                         </li>
                         @endif
