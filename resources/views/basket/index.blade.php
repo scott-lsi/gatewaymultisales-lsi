@@ -94,7 +94,7 @@
 
                         <div class="form-group">
                             <label for="email">Preferred Delivery Date</label>
-                            {!! Form::date('deldate', \Carbon\Carbon::now()->addWeekdays(3), ['class' => 'form-control', 'id' => 'deldate']) !!}
+                            {!! Form::date('deldate', \Carbon\Carbon::now()->addWeekdays(1), ['class' => 'form-control', 'id' => 'deldate']) !!}
                         </div>
 
                         <div class="form-group">
