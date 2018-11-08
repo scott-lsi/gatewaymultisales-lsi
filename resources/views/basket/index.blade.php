@@ -102,8 +102,6 @@
                             {!! Form::textarea('moreinfo', null, ['class' => 'form-control', 'id' => 'moreinfo']) !!}
                         </div>
 
-
-
                         <hr>
 
                         {!! Form::submit('Send To Print', ['class' => 'btn btn-block btn-primary']) !!}
