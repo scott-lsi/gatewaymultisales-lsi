@@ -103,6 +103,7 @@ class CartController extends Controller
         
         // create a new order for the db        
         $order = new Order;
+        $order->user_id = $request->input('user_id');
         $order->name = $request->input('name');
         $order->custnumber = $request->input('custnumber');
         $order->custname = $request->input('custname');

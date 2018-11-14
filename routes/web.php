@@ -34,6 +34,8 @@ Route::post('basket/update-qty/{rowId}', 'CartController@postUpdateQty');
 Route::post('basket/post-to-print', 'CartController@postToPrint');
 Route::get('complete', 'CartController@getComplete');
 
+Route::get('/orders/{id}', 'OrderController@getOrders');
+Route::get('/order/{id}', 'OrderController@getOrder');
 Route::get('/logout', 'HomeController@logout');
 
 });

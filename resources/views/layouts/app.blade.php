@@ -96,6 +96,7 @@
                             <li><a href="{{ route('login') }}">Login</a></li>
                             <li><a href="{{ route('register') }}">Register</a></li>
                             @else
+                            <li><a href="{{ action('OrderController@getOrders', ['id' => auth()->user()->id]) }}">My Orders</a></li>
                             <li><a href="{{ action('CartController@index') }}">Basket</a></li>
                             <li><a href="{{ action('HomeController@logout') }}">Log Out</a></li>
                             @endif

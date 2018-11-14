@@ -72,6 +72,9 @@
                 <div class="panel-heading">Just a few details&hellip;</div>
                 <div class="panel-body">
                     {!! Form::open(['action' => 'CartController@postToPrint']) !!}
+                        
+                        {!! Form::hidden('user_id', auth()->user()->id) !!}
+
                         <div class="form-group">
                             <label for="name">Your Name *</label>
                             {!! Form::text('name', auth()->user()->name, ['class' => 'form-control', 'id' => 'name']) !!}
