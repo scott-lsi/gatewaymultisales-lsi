@@ -44,7 +44,7 @@
                             @endif
 
                             <p><strong>Unit Price:</strong> £{{ $row->price }}</p>
-                            <p><strong>Subtotal:</strong> £{{ $row->price * $row->qty }}</p>
+                            <p><strong>Total:</strong> £{{ $row->price * $row->qty }}</p>
                             
                             {!! Form::open(['action' => ['CartController@postUpdateQty', $row->rowId]]) !!}
                             <div class="row">
@@ -64,6 +64,8 @@
                     @endforeach
                 </tbody>
             </table>
+            <!-- Subtotal shown at the end of cart -->
+            <div class="h3">Subtotal: £{{ Cart::total() }}</div>
         </div>
         
         <div class="col-md-3">

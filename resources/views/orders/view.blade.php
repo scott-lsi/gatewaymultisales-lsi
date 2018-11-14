@@ -21,17 +21,17 @@
                 <td><img src="{{ $row['options']['imageurl'] }}" alt="{{ $row['name'] }}" class="img-responsive"></td>
                 <td>
                     <p><strong>Product</strong>: {{ $row['name'] }}</p>
+                    <p><strong>Quantity:</strong> {{ $row['qty'] }}</p>
                     <p><strong>Unit Price:</strong> £{{ $row['price'] }}</p>
                     <p><strong>Subtotal:</strong> £{{ $row['subtotal'] }}</p>
                     <br>
                     <br>
-                    <a href="{{ action('OrderController@getOrders', ['id' => auth()->user()->id]) }}">Back to My Orders</a>
                 </td>
-
             </tr>
             @endforeach
         </tbody>
     </table>
+    <a href="{{ action('OrderController@getOrders', ['id' => auth()->user()->id]) }}">Back to My Orders</a>
 <!-- 
     @foreach($basket as $row)
     <div class="container-fluid">
