@@ -167,8 +167,8 @@ class CartController extends Controller
             'customer_name' => $request->input('name'),
             'customer_email' => $request->input('email'),
 			
-			'shipping_address_1' =>	'',
-			'shipping_address_2' =>	'',
+			'shipping_address_1' =>	$request->input('custname'),
+			'shipping_address_2' =>	$request->input('moreinfo'),
 			'shipping_address_3' =>	'',
 			'shipping_address_4' =>	'',
 			'shipping_address_5' =>	'',
