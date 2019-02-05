@@ -107,8 +107,7 @@
                             {!! Form::textarea('moreinfo', null, ['class' => 'form-control', 'id' => 'moreinfo']) !!}
                         </div>
 
-                        <hr>
-                        <div class="h4">You can add more to your basket by using the navigation at the top of the page rather than doing multiple orders. Thanks :)</div>
+                        <p>You can add more to your basket by using the navigation at the top of the page rather than doing multiple orders. Thanks :)</p>
 
                         {!! Form::submit('Send To Print', ['class' => 'btn btn-block btn-primary']) !!}
                     {!! Form::close() !!}
