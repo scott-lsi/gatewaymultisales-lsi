@@ -91,7 +91,7 @@
                         </li>
 
                         <li>
-                            <a href="{{ action('ProductController@getProductsByType', 'Boxes') }}" >Mugs</a>
+                            <a href="{{ action('ProductController@getProductsByType', 'Mugs') }}" >Mugs</a>
                         </li>
                         @endif
                     </ul>
