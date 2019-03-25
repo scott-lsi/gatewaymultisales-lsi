@@ -89,6 +89,10 @@
                             <li><a href="{{ action('ProductController@getProductsByType', 'midiBoxWithItems') }}">Midi Box With Items</a></li>
                           </ul>
                         </li>
+
+                        <li>
+                            <a href="{{ action('ProductController@getProductsByType', 'Boxes') }}" >Mugs</a>
+                        </li>
                         @endif
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
