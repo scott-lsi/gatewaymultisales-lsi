@@ -30,5 +30,15 @@ class User extends Authenticatable
     public function orders(){
         return $this->hasMany('App\Order');
     }
+
+    public function isAdmin(){
+        if($this->roles == 'Admin') {
+            return true;
+        }
+        else {
+            return false;
+        }
+        
+    }
 }
  

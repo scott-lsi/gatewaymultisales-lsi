@@ -21,6 +21,17 @@ class ProductController extends Controller
         ]);
     }
 
+    public function getTrashed()
+    {
+        // gets all the products that have been soft deleted
+        $products = Product::onlyTrashed()->get();
+
+        return view('product.trashed', [
+            'products' => $products,
+            'title' => 'Discontinued Products'
+        ]);
+    }
+
 
     
     public function getProductsByType($type)
@@ -129,12 +140,13 @@ class ProductController extends Controller
     public function personaliser($id, $gatewaymultiId = null){
         $product = Product::find($id);
         
-        if(\App::environment('local')) { $iframeUrl = 'https://g3d-app.com/s/app/acp3_2/en_GB/default.html'; }
-        else { $iframeUrl = 'https://my.gateway3d.com/acp/app/?l=acp3'; }
-        $iframeUrl .= '&c=' . env('GATEWAY_CONFIG');
+        if(\App::environment('local')) { $iframeUrl = 'https://g3d-app.com/s/app/acp3_2/en_GB/'; }
+        else { $iframeUrl = 'https://g3d-app.com/s/app/acp3_2/en_GB/'; }
+        $iframeUrl .= env('GATEWAY_CONFIG') . '.html';
         $iframeUrl .= '#p=' . $product->gateway;
         $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
         $iframeUrl .= '&r=2d-canvas';
+        $iframeUrl .= '&_usePs=1';
 		$iframeUrl .= '&epa=' . action('ProductController@getExternalPricingAPI', $product->id);
         $iframeUrl .= '&ep3dUrl=' . action('CartController@add', [$gatewaymultiId]);
         

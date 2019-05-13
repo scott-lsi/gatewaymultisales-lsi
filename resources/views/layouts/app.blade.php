@@ -94,6 +94,12 @@
                             <a href="{{ action('ProductController@getProductsByType', 'Mugs') }}" >Mugs</a>
                         </li>
                         @endif
+
+                        @if(Auth::check() && Auth::user()->isAdmin())
+                        <li>
+                            <a href="{{ action('ProductController@getTrashed') }}">Soft Deletes</a>
+                        </li>                       
+                        @endif
                     </ul>
                     <ul class="nav navbar-nav navbar-right">
                             @if(!\Auth::check())
