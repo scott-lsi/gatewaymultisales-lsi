@@ -44,7 +44,7 @@
                     <ul class="nav navbar-nav" >
                         @if(\Auth::check())
                         <li><a href="{{ action('ProductController@index') }}">All Products</a></li>
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Powerbanks<span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="{{ action('ProductController@getProductsByType', 'Powerbanks') }}">All Powerbanks</a></li>
@@ -56,21 +56,29 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="{{ action('ProductController@getProductsByType', 'shirtPowerbanks') }}">Football Shirt</a></li>
                           </ul>
+                        </li> -->
+
+                        <!-- Swapped the dropdown menu for simple navigation since everything is now grouped. -->
+                        <li>
+                            <a href="{{ action('ProductController@getProductsByType', 'Powerbanks') }}" >Powerbanks</a>
                         </li>
-                        <li class="dropdown">
+
+                        <!-- <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Notebooks<span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="{{ action('ProductController@getProductsByType', 'Notebooks') }}">All Notebooks</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="{{ action('ProductController@getProductsByType', 'hollyEdgeA5Notebooks') }}">A5 Holly Edge Book</a></li>
-                            <li><a href="{{ action('ProductController@getProductsByType', 'hollyA5Notebooks') }}">A5 Holly Book</a></li>
-                            <li><a href="{{ action('ProductController@getProductsByType', 'hollyA6Notebooks') }}">A6 Holly Book</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="{{ action('ProductController@getProductsByType', 'alfieA5Notebooks') }}">A5 Alfie Book</a></li>
-                            <li><a href="{{ action('ProductController@getProductsByType', 'alfieA6Notebooks') }}">A6 Alfie Book</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'A5Notebooks') }}">A5 Books</a></li>
+                            <li><a href="{{ action('ProductController@getProductsByType', 'A6Notebooks') }}">A6 Books</a></li>
                           </ul>
+                        </li> -->
+                        
+                        <!-- Swapped the dropdown menu for simple navigation since everything is now grouped. -->
+                        <li>
+                            <a href="{{ action('ProductController@getProductsByType', 'Notebooks') }}" >Notebooks</a>
                         </li>
-                        <li class="dropdown">
+
+                        <!-- <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Pens<span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="{{ action('ProductController@getProductsByType', 'Pens') }}">All Pens</a></li>
@@ -78,9 +86,14 @@
                             <li><a href="{{ action('ProductController@getProductsByType', 'curvyBallpen') }}">Curvy Ballpen</a></li>
                             <li><a href="{{ action('ProductController@getProductsByType', 'contourBallpen') }}">Contour Ballpen</a></li>
                           </ul>
+                        </li> -->
+
+                        <!-- Swapped the dropdown menu for simple navigation since everything is now grouped. -->
+                        <li>
+                            <a href="{{ action('ProductController@getProductsByType', 'Pens') }}" >Pens</a>
                         </li>
                         
-                        <li class="dropdown">
+                        <!-- <li class="dropdown">
                           <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Boxes<span class="caret"></span></a>
                           <ul class="dropdown-menu">
                             <li><a href="{{ action('ProductController@getProductsByType', 'Boxes') }}">All Boxes</a></li>
@@ -88,6 +101,11 @@
                             <li><a href="{{ action('ProductController@getProductsByType', 'midiBoxes') }}">Midi Box</a></li>
                             <li><a href="{{ action('ProductController@getProductsByType', 'midiBoxWithItems') }}">Midi Box With Items</a></li>
                           </ul>
+                        </li> -->
+
+                        <!-- Swapped the dropdown menu for simple navigation since everything is now grouped. -->
+                        <li>
+                            <a href="{{ action('ProductController@getProductsByType', 'Boxes') }}" >Boxes</a>
                         </li>
 
                         <li>

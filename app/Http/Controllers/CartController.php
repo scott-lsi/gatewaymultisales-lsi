@@ -27,22 +27,41 @@ class CartController extends Controller
         
         // artwork
         $gateway = $this->gatewayAdd($_POST['data']);
-        $product = Product::where('sku', $gateway->sku)->first();
+        // $product = Product::where('sku', $gateway->sku)->first();
+
+        if(isset($gateway->extra->state->product_id)){
+            $product = Product::where('gateway', $gateway->extra->state->product_id)->first();
+        } else {
+            $product = Product::where('sku', $gateway->sku)->first();
+        }
 
         // quantity
         $quantity = $gateway->quantity;
 
+        // aspects
+        $aspects = [];
+        if(isset($gateway->extra->state->aspects[0]->aspect_id)){
+        	$aspects = [
+        		'aspect_id' => $gateway->extra->state->aspects[0]->aspect_id,
+        		'option_id' => $gateway->extra->state->aspects[0]->option_id,
+        	];
+        }
+
         // options
         $options = [];
         $options['printjobid'] = $gateway->printJobId;
+        $options['printjobref'] = $gateway->printJobRef;
         $options['imageurl'] = $gateway->thumburl;
         $options['textinputs'] = $textInputs;
+        $options['aspects'] = $aspects;
+
+        //dd($gateway);
         
         Cart::add(
             $product->id, 
             $product->name, 
             $quantity, 
-            $product->price, 
+            $product->price,
             $options
         );
         
@@ -130,6 +149,7 @@ class CartController extends Controller
         // save it all and send things
         $order->save();
         $this->gatewaySend($g3d);
+        // dd($this->gatewaySend($g3d));
         $this->sendOrderEmail($view_data, $email_data);
         
         Cart::destroy();
@@ -159,8 +179,9 @@ class CartController extends Controller
     }
     
     private function gatewayPrepare(Request $request, $custnumber){
+    	$rnd = str_random(8);
         $gatewayArray = [
-            'external_ref' => $request->input('custnumber'),
+            'external_ref' => $request->input('custnumber') . '-' . $rnd,
             'company_ref_id' => env('GATEWAY_COMPANY'),
             'sale_datetime' => date('Y-m-d H:i:s'),
             
@@ -174,7 +195,7 @@ class CartController extends Controller
 			'shipping_address_5' =>	'',
 			'shipping_postcode' =>	'',
 			'shipping_country' =>	'',
-			'shipping_country_code' => '',
+			'shipping_country_code' => 'GB',
 			
 			'shipping_method' =>	'',
 			'shipping_carrier' =>	'',
@@ -201,12 +222,14 @@ class CartController extends Controller
                 
                 $productArray = [
                     'sku' => $product->sku,
-                    'external_ref' => $custnumber,
+                    'external_ref' => $custnumber . '-' . $rnd . '-' . $i,
                     'description' => $row->name,
                     'quantity' => $row->qty,
                     'type' => 2, // 2 = Print Job (http://developers.gateway3d.com/Print-iT_Integration#Item_Type_Codes)
                     'print_job_id' => $row->options->printjobid,
+                    'print_job_ref' => $row->options->printjobref,
                     'unit_sale_price' => $row->price,
+                    'aspects' => [$row->options->aspects],
                 ];
 				
 				$items[] = $productArray;
@@ -222,25 +245,41 @@ class CartController extends Controller
     }
     
     private function gatewaySend($order){
-        $gatewayUrl = env('GATEWAY_API_URL') . env('GATEWAY_API_KEY');
+        $gatewayUrl = env('GATEWAY_API_URL');
         
 		$curl = curl_init($gatewayUrl);
 		curl_setopt($curl, CURLOPT_HEADER, false);
 		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($curl, CURLOPT_HTTPHEADER,
-			array("Content-type: application/json"));
+		curl_setopt($curl, CURLOPT_HTTPAUTH, CURLAUTH_BASIC);
+		curl_setopt($curl, CURLOPT_USERPWD, true);
+
+		$headers = array();
+		$headers[] = 'Content-Type: application/json';
+		$headers[] = 'Authorization: Basic 13064:d70hxn0y03wyhq5g0d887r855p9';
+
+		// dd($headers);
+
+		curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
 		curl_setopt($curl, CURLOPT_POST, true);
 		curl_setopt($curl, CURLOPT_POSTFIELDS, $order);
+		curl_setopt($curl, CURLINFO_HEADER_OUT, true);
 
 		$gatewayResponse = curl_exec($curl);
 
 		$status = curl_getinfo($curl, CURLINFO_HTTP_CODE);
+		// $info = curl_getinfo($curl);
+		
+		// echo base64_decode('MTMwNjQ6ZDcwaHhuMHkwM3d5aHE1ZzBkODg3cjg1NXA=');
+		//var_dump($info['request_header']);
+		//return;
 
-		if($status != 201) {
+		if($status != 200) {
 			die("Error: call to URL $gatewayUrl failed with status $status, response $gatewayResponse, curl_error " . curl_error($curl) . ", curl_errno " . curl_errno($curl));
 		}
 
 		curl_close($curl);
+		
     }
     
     private function sendOrderEmail($view_data, $email_data){
