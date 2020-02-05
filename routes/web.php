@@ -18,6 +18,7 @@ Auth::routes();
 //Route::get('/test', 'PageController@test');
 Route::middleware(['auth'])->group(function () {
 Route::get('/export', 'ExportController@exportOrders');
+Route::get('/export/{email?}', 'ExportController@exportOrders');
 
 Route::get('/products', 'ProductController@index');
 Route::get('/products/trashed', 'ProductController@getTrashed');

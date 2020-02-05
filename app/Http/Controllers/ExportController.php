@@ -8,7 +8,7 @@ use App\Order;
 
 class ExportController extends Controller
 {
-    public function exportOrders(){
+    public function exportOrders($email = null){
         $today = new \Datetime();
         $onemonth = new \DateInterval('P1M');
         $today_formatted = $today->format('Y-m-d');
@@ -32,7 +32,7 @@ class ExportController extends Controller
                 $total = $total + $row['subtotal'];
             }
             
-            // build the order row and push onbto the array
+            // build the order row and push onto the array
             $thisorder = [
                 'orderid' => $order->id,
                 'placed_by' => $order->name,
@@ -67,9 +67,16 @@ class ExportController extends Controller
         })->store('xlsx', false, true);
         
         $view_data = [];
-        $email_data = [
-            'email' => env('REPORT_EMAIL'),
-        ];
+        if($email){
+            $email_data = [
+                'email' => $email,
+            ];
+        } else {
+            $email_data = [
+                'email' => env('REPORT_EMAIL'),
+            ];
+        }
+
         
         \Mail::send('emails.report', $view_data, function($message) use($email_data, $file) {
             $message->to($email_data['email'])
