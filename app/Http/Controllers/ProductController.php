@@ -137,23 +137,29 @@ class ProductController extends Controller
         //
     }
     
-    public function personaliser($id, $gatewaymultiId = null){
+    public function personaliser($id, $gatewaymultiId, $printJobRef = null, $rowIdToUpdate = null){
         $product = Product::find($id);
-        
-        if(\App::environment('local')) { $iframeUrl = 'https://g3d-app.com/s/app/acp3_2/en_GB/'; }
-        else { $iframeUrl = 'https://g3d-app.com/s/app/acp3_2/en_GB/'; }
+
+        $addToBasketUrl = action('CartController@add', [$gatewaymultiId, $rowIdToUpdate]);
+
+        $iframeOrigin = 'https://g3d-app.com';
+        $iframeUrl = $iframeOrigin;
+        $iframeUrl .= '/s/app/acp3_2/en_GB/';
         $iframeUrl .= env('GATEWAY_CONFIG') . '.html';
         $iframeUrl .= '#p=' . $product->gateway;
+        if($printJobRef){
+            $iframeUrl .= '&pj=' . $printJobRef;
+        }
         $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
         $iframeUrl .= '&r=2d-canvas';
-        $iframeUrl .= '&_usePs=1';
-		$iframeUrl .= '&epa=' . action('ProductController@getExternalPricingAPI', $product->id);
-        $iframeUrl .= '&ep3dUrl=' . action('CartController@add', [$gatewaymultiId]);
+        $iframeUrl .= '&a2c=postMessage';
+        $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
+        $iframeUrl .= '&_usePs=1&_pav=3';
         
-
         return view('product.personaliser', [
-            'product' => $product,
+            'iframeOrigin' => $iframeOrigin,
             'iframeUrl' => $iframeUrl,
+            'addToBasketUrl' => $addToBasketUrl,
         ]);
     }
 	

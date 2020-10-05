@@ -18,54 +18,68 @@ class CartController extends Controller
         ]);
     }
     
-    public function add(Request $request, $gatewaymultiId = null){
-        // get what's been typed in
-        $textInputs = array_filter(json_decode($_POST['data'], true), function($key){
-            return strpos($key, 'userText') === 0 && !strpos($key, '_');
-        }, ARRAY_FILTER_USE_KEY);
-        ksort($textInputs);
-        
-        // artwork
-        $gateway = $this->gatewayAdd($_POST['data']);
-        // $product = Product::where('sku', $gateway->sku)->first();
+    public function add(Request $request, $gatewaymultiId, $rowIdToUpdate = null){
+        $gateway = $request->data;
+        $options = [];
 
-        if(isset($gateway->extra->state->product_id)){
-            $product = Product::where('gateway', $gateway->extra->state->product_id)->first();
+        // get the product form the db
+        if(isset($gateway['extra']['state']['product_id'])){
+            $product = Product::where('gateway', $gateway['extra']['state']['product_id'])->first();
         } else {
-            $product = Product::where('sku', $gateway->sku)->first();
+            $product = Product::where('sku', $gateway['sku'])->first();
         }
 
         // quantity
-        $quantity = $gateway->quantity;
+        $quantity = $gateway['quantity'];
 
         // aspects
         $aspects = [];
-        if(isset($gateway->extra->state->aspects[0]->aspect_id)){
+        if(isset($gateway['extra']['state']['aspects'][0]['aspect_id'])){
         	$aspects = [
-        		'aspect_id' => $gateway->extra->state->aspects[0]->aspect_id,
-        		'option_id' => $gateway->extra->state->aspects[0]->option_id,
+        		'aspect_id' => $gateway['extra']['state']['aspects'][0]['aspect_id'],
+        		'option_id' => $gateway['extra']['state']['aspects'][0]['option_id'],
         	];
         }
 
         // options
-        $options = [];
-        $options['printjobid'] = $gateway->printJobId;
-        $options['printjobref'] = $gateway->printJobRef;
-        $options['imageurl'] = $gateway->thumburl;
-        $options['textinputs'] = $textInputs;
+        $options['printjobref'] = $gateway['ref'];
+        $options['imageurl'] = $gateway['thumbnails'][0]['url'];
         $options['aspects'] = $aspects;
+        // options -> text inputs
+        if(isset($gateway['extra']['state']['text_areas'])){
+            $textInputs = [];
+            foreach($gateway['extra']['state']['text_areas'] as $textarea){
+                if(isset($textarea['text'])){
+                    $textInputs[] = $textarea['text'];
+                }
+            }
+            $options['textinputs'] = $textInputs;
+            \Log::info($textInputs);
+        }
+        
+        if($rowIdToUpdate){
+            \Log::info('$rowIdToUpdate = ' . $rowIdToUpdate);
+            $original_row = Cart::get($rowIdToUpdate);
+            \Log::info($original_row);
 
-        //dd($gateway);
+            \Log::info('Updating');
+            $updated_row = Cart::update($rowIdToUpdate, [
+                'quantity' => $quantity,
+                'options' => $options
+            ]);
+            \Log::info($updated_row);
+        } else {
+            \Log::info('Adding');
+            Cart::add(
+                $product->id, 
+                $product->name, 
+                $quantity, 
+                $product->price,
+                $options
+            );
+        }
         
-        Cart::add(
-            $product->id, 
-            $product->name, 
-            $quantity, 
-            $product->price,
-            $options
-        );
-        
-        if($gatewaymultiId){
+        if($gatewaymultiId > 0){
             // it's a gatewaymulti product
             $gatewaymultiProduct = Product::find($gatewaymultiId);
             $gatewaymultiGateways = json_decode($gatewaymultiProduct->gatewaymulti, true);
@@ -73,21 +87,63 @@ class CartController extends Controller
             $thisId = array_search($product->id, $gatewaymultiGateways);
         
             if(array_key_exists($thisId+1, $gatewaymultiGateways)){
-                return redirect()->action('CartController@gatewayRedir', [$gatewaymultiGateways[$thisId+1], $gatewaymultiId]);
+                return action('ProductController@personaliser', [$gatewaymultiGateways[$thisId+1], $gatewaymultiId]);
             }
         }
         
-        return redirect()->action('CartController@gatewayRedir');
+        return action('CartController@index');
     }
-    
-    public function gatewayRedir($id = null, $gatewaymultiId = null){
-        if($id && $gatewaymultiId){
-            return view('basket.gatewaymulti_redir', [
-                'redirUrl' => action('ProductController@personaliser', [$id, $gatewaymultiId]),
-            ]);
-        } else {
-            return view('basket.gateway_redir');
+
+    public function update(Request $request, $rowIdToUpdate){
+        $gateway = $request->data;
+        $options = [];
+
+        // get what's been typed in
+        if(isset($gateway['extra']['state']['text_areas'])){
+            $textInputs = [];
+            foreach($gateway['extra']['state']['text_areas'] as $textarea){
+                if(isset($textarea['text'])){
+                    $textInputs[] = $textarea['text'];
+                }
+            }
+            $options['textinputs'][] = $textInputs;
         }
+
+        // get the product form the db
+        if(isset($gateway['extra']['state']['product_id'])){
+            $product = Product::where('gateway', $gateway['extra']['state']['product_id'])->first();
+        } else {
+            $product = Product::where('sku', $gateway['sku'])->first();
+        }
+
+        // quantity
+        $quantity = $gateway['quantity'];
+
+        // aspects
+        $aspects = [];
+        if(isset($gateway['extra']['state']['aspects'][0]['aspect_id'])){
+        	$aspects = [
+        		'aspect_id' => $gateway['extra']['state']['aspects'][0]['aspect_id'],
+        		'option_id' => $gateway['extra']['state']['aspects'][0]['option_id'],
+        	];
+        }
+
+        // options
+        $options = [];
+        $options['printjobref'] = $gateway['ref'];
+        $options['imageurl'] = $gateway['thumbnails'][0]['url'];
+        $options['textinputs'] = $textInputs;
+        $options['aspects'] = $aspects;
+
+        Cart::update($rowIdToUpdate, [
+            $product->id, 
+            $product->name, 
+            $quantity, 
+            $product->price,
+            $options
+        ]);
+
+        return action('CartController@index');
     }
     
     public function destroy(){
@@ -157,25 +213,6 @@ class CartController extends Controller
         return view('basket.complete', [
             'order' => $order,
         ]);
-    }
-    
-    private function gatewayAdd($data){
-        $type = $_SERVER['CONTENT_TYPE'];
-        switch($type)
-        {
-            case 'application/json':
-                $json = file_get_contents('php://input');
-                break;
-
-            case 'application/x-www-form-urlencoded':
-                $json = $data;
-                break;
-
-            default:
-                throw new Exception('Invalid content-type');
-        }
-
-        return json_decode($json);
     }
     
     private function gatewayPrepare(Request $request, $custnumber){

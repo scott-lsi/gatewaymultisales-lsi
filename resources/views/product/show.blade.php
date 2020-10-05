@@ -28,7 +28,7 @@
             @if($product->gateway)
             <p>You may personalise this product</p>
             
-            <p><a href="{{ action('ProductController@personaliser', $product->id) }}" class="btn btn-primary hidden-xs hidden-sm">Personalise Now</a> </p>
+            <p><a href="{{ action('ProductController@personaliser', [$product->id, 0]) }}" class="btn btn-primary hidden-xs hidden-sm">Personalise Now</a> </p>
             <p><a href="{{ $mobileUrl }}" class="btn btn-primary hidden-lg hidden-md">Personalise Now</a> </p>
             @endif
             

@@ -23,9 +23,36 @@
 	
 	<body>
 		<div id="personaliser">
-			<iframe src="{{ $iframeUrl }}"></iframe>
+			<iframe src="" id="personaliser-iframe"></iframe>
 		</div>
-        
-        <script src="{{ asset('js/app.js') }}"></script>
+
+		<script src="{{ asset('js/app.js') }}"></script>
+
+		<script>
+			$(function(){
+				let iframeOrigin = '<?php echo $iframeOrigin; ?>';
+				let iframeUrl = '<?php echo $iframeUrl; ?>';
+
+				let meo = location.origin;
+				let mei = Math.random().toString(16).substr(2);
+
+				window.addEventListener("message", e => {
+					if(e.origin == iframeOrigin && e.data.id == mei){
+						switch(e.data.name){
+							case 'ADD_TO_CART_CALLBACK':
+							// handle the callback
+							var jqxhr = $.post('{{ $addToBasketUrl }}', { data: e.data.body.items[0] });
+							jqxhr.done(function(){
+								window.parent.location.href = jqxhr.responseText;
+							});
+							break;
+						}
+					}
+				});
+
+				let iframe = document.getElementById('personaliser-iframe');
+				iframe.src = iframeUrl + "&meo=" + meo + "&mei=" + mei;
+			});
+		</script>
 	</body>
 </html>

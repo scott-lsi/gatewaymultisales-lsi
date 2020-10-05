@@ -43,8 +43,8 @@
                             </p>
                             @endif
 
-                            <p><strong>Unit Price:</strong> £{{ $row->price }}</p>
-                            <p><strong>Total:</strong> £{{ $row->price * $row->qty }}</p>
+                            <p><strong>Unit Price:</strong> £{{ number_format($row->price, 2) }}</p>
+                            <p><strong>Total:</strong> £{{ number_format($row->price * $row->qty, 2) }}</p>
                             
                             {!! Form::open(['action' => ['CartController@postUpdateQty', $row->rowId]]) !!}
                             <div class="row">
@@ -58,14 +58,17 @@
                             </div>
                             {!! Form::close() !!}
                             
-                            <p><small><a href="{{ action('CartController@getRemoveItem', ['rowId' => $row->rowId]) }}">Remove</a></small></p>
+                            <p>
+                                <small><a href="{{ action('CartController@getRemoveItem', ['rowId' => $row->rowId]) }}">Remove</a></small> |
+                                <small><a href="{{ action('ProductController@personaliser', [$row->id, 0, $row->options->printjobref, $row->rowId]) }}">Edit Personalisation</a></small>
+                            </p>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
             <!-- Subtotal shown at the end of cart -->
-            <div class="h3">Subtotal: £{{ Cart::total() }}</div>
+            <div class="h3">Subtotal: £{{ Cart::total(2, '.', ',') }}</div>
         </div>
         
         <div class="col-md-3">
