@@ -3,7 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
+
 use Cart;
+
 use App\Product;
 use App\Order;
 
@@ -216,7 +219,7 @@ class CartController extends Controller
     }
     
     private function gatewayPrepare(Request $request, $custnumber){
-    	$rnd = str_random(8);
+    	$rnd = Str::random(8);
         $gatewayArray = [
             'external_ref' => $request->input('custnumber') . '-' . $rnd,
             'company_ref_id' => env('GATEWAY_COMPANY'),
@@ -254,7 +257,7 @@ class CartController extends Controller
         $i = 1;
         $items = [];
         foreach(Cart::content() as $row){
-            if($row->options->printjobid){
+            if($row->options->printjobref){
                 $product = \App\Product::find($row->id);
                 
                 $productArray = [
