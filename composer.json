@@ -10,7 +10,7 @@
         "facade/ignition": "^2.3.6",
         "fideloper/proxy": "^4.0",
         "guzzlehttp/guzzle": "7.0.1",
-        "hardevine/shoppingcart": "^2.7.*",
+        "hardevine/shoppingcart": "^2.9",
         "laravel/framework": "^8.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^3.0",
