@@ -26,7 +26,7 @@ class ExportController extends Controller
         if($email){
             $to = $email;
         } else {
-            $to = env('REPORT_EMAIL');
+            $to = explode(',', env('REPORT_EMAIL'));
         }
 
         Mail::to($to)
