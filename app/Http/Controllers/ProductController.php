@@ -142,8 +142,6 @@ class ProductController extends Controller
 
         $addToBasketUrl = action('CartController@add', [$gatewaymultiId, $rowIdToUpdate]);
 
-        https://legacy.custom-gateway.net/acp/app/?l=acp3_2-staging&c=brz2kzjxm6fhvm6#p=2542630&r=2d-canvas&guid=23379&a2c=postMessage&_usePs=1&_pav=3
-
         $iframeOrigin = 'https://legacy.custom-gateway.net';
         $iframeUrl = $iframeOrigin;
         $iframeUrl .= '/acp/app/?l=acp3_2-staging';
