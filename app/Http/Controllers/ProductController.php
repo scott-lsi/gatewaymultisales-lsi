@@ -142,7 +142,23 @@ class ProductController extends Controller
 
         $addToBasketUrl = action('CartController@add', [$gatewaymultiId, $rowIdToUpdate]);
 
-        $iframeOrigin = 'https://g3d-app.com';
+        https://legacy.custom-gateway.net/acp/app/?l=acp3_2-staging&c=brz2kzjxm6fhvm6#p=2542630&r=2d-canvas&guid=23379&a2c=postMessage&_usePs=1&_pav=3
+
+        $iframeOrigin = 'https://legacy.custom-gateway.net';
+        $iframeUrl = $iframeOrigin;
+        $iframeUrl .= '/acp/app/?l=acp3_2-staging';
+        $iframeUrl .= '&c=' . env('GATEWAY_CONFIG');
+        $iframeUrl .= '#p=' . $product->gateway;
+        if($printJobRef){
+            $iframeUrl .= '&pj=' . $printJobRef;
+        }
+        $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
+        $iframeUrl .= '&r=2d-canvas';
+        $iframeUrl .= '&a2c=postMessage';
+        $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
+        $iframeUrl .= '&_usePs=1&_pav=3';
+
+        /*$iframeOrigin = 'https://g3d-app.com';
         $iframeUrl = $iframeOrigin;
         $iframeUrl .= '/s/app/acp3_2/en_GB/';
         $iframeUrl .= env('GATEWAY_CONFIG') . '.html';
@@ -154,7 +170,7 @@ class ProductController extends Controller
         $iframeUrl .= '&r=2d-canvas';
         $iframeUrl .= '&a2c=postMessage';
         $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
-        $iframeUrl .= '&_usePs=1&_pav=3';
+        $iframeUrl .= '&_usePs=1&_pav=3';*/
         
         return view('product.personaliser', [
             'iframeOrigin' => $iframeOrigin,
