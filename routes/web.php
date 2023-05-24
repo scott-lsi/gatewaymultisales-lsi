@@ -38,4 +38,7 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/orders/{id}', 'OrderController@getOrders');
     Route::get('/order/{id}', 'OrderController@getOrder');
     Route::get('/logout', 'HomeController@logout');
+
+    Route::get('/pcs', 'HomeController@getCreatePcs');
+    Route::post('/pcs', 'HomeController@postCreatePcs');
 });

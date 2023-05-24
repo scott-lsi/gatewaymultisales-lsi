@@ -12,6 +12,7 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    @stack('styles')
 </head>
 <body>
     <div id="app">
@@ -133,7 +134,7 @@
             </div>
         </nav>
         
-        @if(session('message'))
+        @if(session()->has('message'))
             <div class="container">
                 <div class="alert alert-{{ session('message.type')}}">
                     {!! session('message.content') !!}
@@ -153,5 +154,6 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}"></script>
+    @stack('scripts')
 </body>
 </html>
