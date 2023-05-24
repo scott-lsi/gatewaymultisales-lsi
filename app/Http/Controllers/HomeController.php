@@ -53,9 +53,6 @@ class HomeController extends Controller
             'site_subdomain' => $request->subdomain,
         ]);
 
-        return $external_gallery_creation_response->body();
-        die();
-
         if(!$external_gallery_creation_response->successful()){
             session()->flash('message', [
                 'type' => json_decode($external_gallery_creation_response->body())->status != 'success' ? 'danger' : 'success',
