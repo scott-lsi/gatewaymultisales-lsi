@@ -53,7 +53,7 @@
         <div class="form-group">
             <label for="colour">Colour</label><br>
             <input type="text" class="form-control" id="colour" name="colour" value="{{ old('colour') }}" required data-coloris>
-            <p class="help-block">The site will be styled using this colour. Pick something good for the company you're making this for.</p>
+            <p class="help-block">This <u>must</u> be a hex reference. Please use the colour picker to choose one or enter the reference if you know it, with the '#' in front of it. The site will be styled using this colour. Pick something good for the company you're making this for.</p>
         </div>
 
         <div class="form-group">
