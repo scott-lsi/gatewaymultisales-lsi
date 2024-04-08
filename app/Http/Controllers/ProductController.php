@@ -167,7 +167,7 @@ class ProductController extends Controller
         $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
         $iframeUrl .= '&r=2d-canvas';
         $iframeUrl .= '&a2c=postMessage';
-//        $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
+        $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
         $iframeUrl .= '&_usePs=1&_pav=3';
         
         return view('product.personaliser', [
