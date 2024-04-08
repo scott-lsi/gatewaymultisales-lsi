@@ -159,7 +159,7 @@ class ProductController extends Controller
         $iframeOrigin = 'https://g3d-app.com';
         $iframeUrl = $iframeOrigin;
         $iframeUrl .= '/s/app/acp3_2/en_GB/';
-        $iframeUrl .= 'default.html';
+        $iframeUrl .= env('GATEWAY_CONFIG') . '.html';
         $iframeUrl .= '#p=' . $product->gateway;
         if($printJobRef){
             $iframeUrl .= '&pj=' . $printJobRef;
