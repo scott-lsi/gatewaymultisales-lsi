@@ -188,7 +188,7 @@ class ProductController extends Controller
 			'description' => $product->description,
 		];
 		$epaJson = json_encode($epaArray);
-
+		
 		header('Content-type: application/javascript'); // this was text/plain as per the docs, but on poshop digitalocean server it requires application/javascript in chrome
 		echo "{$callback}({$epaJson})";
 		exit;
