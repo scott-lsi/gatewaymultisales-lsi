@@ -142,10 +142,24 @@ class ProductController extends Controller
 
         $addToBasketUrl = action('CartController@add', [$gatewaymultiId, $rowIdToUpdate]);
 
-        $iframeOrigin = 'https://legacy.custom-gateway.net';
+//        $iframeOrigin = 'https://legacy.custom-gateway.net';
+//        $iframeUrl = $iframeOrigin;
+//        $iframeUrl .= '/acp/app/?l=acp3_2-staging';
+//        $iframeUrl .= '&c=' . env('GATEWAY_CONFIG');
+//        $iframeUrl .= '#p=' . $product->gateway;
+//        if($printJobRef){
+//            $iframeUrl .= '&pj=' . $printJobRef;
+//        }
+//        $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
+//        $iframeUrl .= '&r=2d-canvas';
+//        $iframeUrl .= '&a2c=postMessage';
+//        $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
+//        $iframeUrl .= '&_usePs=1&_pav=3';
+
+        $iframeOrigin = 'https://g3d-app.com';
         $iframeUrl = $iframeOrigin;
-        $iframeUrl .= '/acp/app/?l=acp3_2-staging';
-        $iframeUrl .= '&c=' . env('GATEWAY_CONFIG');
+        $iframeUrl .= '/s/app/acp3_2/en_GB/';
+        $iframeUrl .= env('GATEWAY_CONFIG') . '.html';
         $iframeUrl .= '#p=' . $product->gateway;
         if($printJobRef){
             $iframeUrl .= '&pj=' . $printJobRef;
@@ -156,20 +170,6 @@ class ProductController extends Controller
         $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
         $iframeUrl .= '&_usePs=1&_pav=3';
 
-//        $iframeOrigin = 'https://g3d-app.com';
-//        $iframeUrl = $iframeOrigin;
-//        $iframeUrl .= '/s/app/acp3_2/en_GB/';
-//        $iframeUrl .= env('GATEWAY_CONFIG') . '.html';
-//        $iframeUrl .= '#p=' . $product->gateway;
-//        if($printJobRef){
-//            $iframeUrl .= '&pj=' . $printJobRef;
-//        }
-//        $iframeUrl .= '&guid=' . env('GATEWAY_COMPANY');
-//        $iframeUrl .= '&r=2d-canvas';
-//        $iframeUrl .= '&a2c=postMessage';
-////        $iframeUrl .= '&epa=' . rawurlencode(action('ProductController@getExternalPricingAPI', $product->id));
-//        $iframeUrl .= '&_usePs=1&_pav=3';
-//
         return view('product.personaliser', [
             'iframeOrigin' => $iframeOrigin,
             'iframeUrl' => $iframeUrl,
